@@ -1,0 +1,12 @@
+1. Create Repo --- done.
+
+2. Installing Dependancies :-
+    - react-router-dom --- done.
+    - axios --- done.
+    - redux --- done.
+    - react-redux --- done.
+    - chakra-ui --- done.
+
+3. wrap app inside BrowserRouter - done.
+
+4. create folder structure : 
