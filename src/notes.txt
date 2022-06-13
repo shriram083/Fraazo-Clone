@@ -7,6 +7,26 @@
     - react-redux --- done.
     - chakra-ui --- done.
 
-3. wrap app inside BrowserRouter - done.
+3. wrap app inside BrowserRouter --- done.
 
-4. create folder structure : 
+4. create folder structure : --- done.
+    - components
+        - Footer.jsx
+        - Navbar.jsx
+    - HOC
+        - RequiredAuth.jsx
+    - pages
+        - ErrorPage.jsx (404)
+        - Home.jsx
+        - ProductDetails.jsx
+        - Products.jsx
+    - store
+        - Authentication
+            - auth.actions.js
+            - auth.reducer.js
+            - auth.types.js
+        - Products
+            - products.actions.js
+            - products.reducer.js
+            - products.types.js
+    - store.js
