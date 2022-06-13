@@ -1,8 +1,12 @@
 import React from 'react'
+import { Box } from "@chakra-ui/react";
+import ProductLayout from '../components/ProductLayout';
 
 const ProductDetails = () => {
   return (
-    <div>ProductDetails</div>
+    <Box>
+      <ProductLayout/>
+    </Box>
   )
 }
 
