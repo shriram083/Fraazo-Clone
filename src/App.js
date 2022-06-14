@@ -15,28 +15,29 @@ import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
 
 function App() {
-
-
   return (
-    <Container className="App" maxW={'none'} >
+    <Container className="App" maxW={"none"}>
       <Navbar />
-      <Container style={{ paddingTop: "60px", border: "1px solid blue" }} maxW="container.xl" boxSizing="border-box">
+      <Container
+        style={{ paddingTop: "60px", border: "1px solid blue" }}
+        maxW="container.xl"
+        boxSizing="border-box"
+      >
         <Routes>
           <Route path="*" element={<ErrorPage />} />
           <Route path="/" element={<Home />} />
           <Route path="/Products" element={<Products />} />
           <Route path="/Products/:id" element={<ProductDetails />} />
-          <Route path="/myaccount/*" element={<SimpleSidebar />} >
-            <Route path="myorders" element={<MyOrders/>} />
-            <Route path="mycredits" element={<MyCredits/>} />
-            <Route path="invite" element={<Invite/>} />
-            <Route path="support" element={<Support/>} />
+          <Route path="/myaccount/*" element={<SimpleSidebar />}>
+            <Route path="myorders" element={<MyOrders />} />
+            <Route path="mycredits" element={<MyCredits />} />
+            <Route path="invite" element={<Invite />} />
+            <Route path="support" element={<Support />} />
           </Route>
-          
-          <Route path="/Checkout" element={<Checkout />} />         
+
+          <Route path="/Checkout" element={<Checkout />} />
         </Routes>
       </Container>
-      
     </Container>
   );
 }
