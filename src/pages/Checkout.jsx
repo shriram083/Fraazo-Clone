@@ -12,6 +12,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import styled from "styled-components";
+import Payment from "../components/Payment";
 
 const CartIcon = styled.i`font-size=40px; cursor:pointer; `;
 const Checkout = () => {
@@ -138,7 +139,7 @@ const Checkout = () => {
             <p>Three!</p>
           </TabPanel>
           <TabPanel>
-            <p>Four!</p>
+            <Payment />
           </TabPanel>
         </TabPanels>
       </Tabs>
