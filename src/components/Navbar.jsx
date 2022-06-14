@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/homeLogo.svg"
+import logo from "../assets/homeLogo.svg";
 import {
   Box,
   Button,
@@ -82,9 +82,7 @@ const Navbar = () => {
               fontSize="20px"
               color={useColorModeValue("orange.400", "white")}
             >
-              <Link to="/">
-                Home
-              </Link>
+              <Link to="/">Home</Link>
             </Text>
 
             <Flex display={{ base: "none", md: "flex" }} ml={10}>
@@ -104,8 +102,12 @@ const Navbar = () => {
               justifyContent="center"
               color={useColorModeValue("black", "white")}
             >
+              {/* //TODO  */}
               <Link to="/cart">
-                <CartIcon className="fa-solid fa-cart-shopping"></CartIcon>
+                <CartIcon
+                  className="fa-solid fa-cart-shopping"
+                  
+                ></CartIcon>
               </Link>
             </Stack>
             <Button fontSize={"sm"} fontWeight={400}>

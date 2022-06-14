@@ -84,5 +84,32 @@ const getCombosFruitsAPI = (payload) => (dispatch) => {
     .then((r) => dispatch(getCombosFruitsSuccess(r.data)))
     .catch((e) => dispatch(getCombosFruitsError(e.data)));
 };
+// Get combo fruits Api call ##########################################
+const getBestDealsLoading = (payload) => {
+  return {
+    type: types.GET_BEST_DEALS_LOADING,
+    payload,
+  };
+};
+const getBestDealsSuccess = (payload) => {
+  return {
+    type: types.GET_BEST_DEALS_SUCCESS,
+    payload,
+  };
+};
+const getBestDealsError = (payload) => {
+  return {
+    type: types.GET_BEST_DEALS_ERROR,
+    payload,
+  };
+};
 
-export { getFreshFruitsAPI, getExoticFruitsAPI,getCombosFruitsAPI };
+const getBestDealsAPI = (payload) => (dispatch) => {
+  dispatch(getBestDealsLoading(payload));
+  axios
+    .get(`/products?subCatagory=bestDeals`)
+    .then((r) => dispatch(getBestDealsSuccess(r.data)))
+    .catch((e) => dispatch(getBestDealsError(e.data)));
+};
+
+export { getFreshFruitsAPI, getExoticFruitsAPI,getCombosFruitsAPI,getBestDealsAPI };

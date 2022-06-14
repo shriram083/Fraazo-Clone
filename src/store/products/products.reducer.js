@@ -16,6 +16,11 @@ const initialState = {
     error: false,
     data: [],
   },
+  bestDeals: {
+    loading: false,
+    error: false,
+    data: [],
+  },
 };
 
 export const porductsReducer = (state = initialState, { type, payload }) => {
@@ -94,6 +99,32 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         combosFruits: {
+          loading: false,
+          error: true,
+        },
+      };
+    // Get bestDeals Api call ##########################################
+    case types.GET_BEST_DEALS_LOADING:
+      return {
+        ...state,
+        bestDeals: {
+          loading: true,
+          error: false,
+        },
+      };
+    case types.GET_BEST_DEALS_SUCCESS:
+      return {
+        ...state,
+        bestDeals: {
+          loading: false,
+          error: false,
+          data: payload,
+        },
+      };
+    case types.GET_BEST_DEALS_ERROR:
+      return {
+        ...state,
+        bestDeals: {
           loading: false,
           error: true,
         },

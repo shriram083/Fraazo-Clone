@@ -9,6 +9,7 @@ import { porductsReducer } from "./products/products.reducer";
 
 const rootReducer = combineReducers({
   products: porductsReducer,
+  
 });
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk));

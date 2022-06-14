@@ -2,7 +2,10 @@ import React from "react";
 
 
 const ProductLayout = () => {
-  return (<div>Product Layout</div>)
+  return (<div>
+    {/* TODO Product details page  */}
+    Product Layout
+  </div>)
 };
 
 export default ProductLayout;
