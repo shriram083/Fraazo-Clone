@@ -14,7 +14,7 @@ function App() {
   return (
     <Container className="App" maxW={'none'} >
       <Navbar />
-      <Container style={{ paddingTop: "60px", border: "1px solid blue" }} maxW="container.xl" height={'500px'}>
+      <Container style={{ paddingTop: "60px", border: "1px solid blue" }} maxW="container.xl" boxSizing="border-box">
         <Routes>
           <Route path="*" element={<ErrorPage />} />
           <Route path="/" element={<Home />} />
