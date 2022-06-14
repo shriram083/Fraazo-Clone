@@ -7,7 +7,6 @@ const ErrorPage = () => {
   const id = useParams();
   // console.log("id", id);
 
-
   return (
     <Box
       textAlign="center"
