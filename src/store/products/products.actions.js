@@ -1,6 +1,34 @@
 import * as types from "./products.types";
 import axios from "axios";
 
+// Get Mangoes Api call ##########################################
+const getMangoesLoading = (payload) => {
+  return {
+    type: types.GET_MANGOES_LOADING,
+    payload,
+  };
+};
+const getMangoesSuccess = (payload) => {
+  return {
+    type: types.GET_MANGOES_SUCCESS,
+    payload,
+  };
+};
+const getMangoesError = (payload) => {
+  return {
+    type: types.GET_MANGOES_ERROR,
+    payload,
+  };
+};
+
+const getMangoesAPI = (payload) => (dispatch) => {
+  dispatch(getMangoesLoading(payload));
+  axios
+    .get(`/products?subCatagory=mangoes`)
+    .then((r) => dispatch(getMangoesSuccess(r.data)))
+    .catch((e) => dispatch(getMangoesError(e.data)));
+};
+
 // Get fresh fruits Api call ##########################################
 const getFreshFruitsLoading = (payload) => {
   return {
@@ -84,7 +112,178 @@ const getCombosFruitsAPI = (payload) => (dispatch) => {
     .then((r) => dispatch(getCombosFruitsSuccess(r.data)))
     .catch((e) => dispatch(getCombosFruitsError(e.data)));
 };
+
+// VEGETABLES
+
 // Get combo fruits Api call ##########################################
+const getDailyVegetablesLoading = (payload) => {
+  return {
+    type: types.GET_DAILY_VAGETABLES_LOADING,
+    payload,
+  };
+};
+const getDailyVegetablesSuccess = (payload) => {
+  return {
+    type: types.GET_DAILY_VAGETABLES_SUCCESS,
+    payload,
+  };
+};
+const getDailyVegetablesError = (payload) => {
+  return {
+    type: types.GET_DAILY_VAGETABLES_ERROR,
+    payload,
+  };
+};
+
+const getDailyVegetablesAPI = (payload) => (dispatch) => {
+  dispatch(getDailyVegetablesLoading(payload));
+  axios
+    .get(`/products?subCatagory=dailyVeggies`)
+    .then((r) => dispatch(getDailyVegetablesSuccess(r.data)))
+    .catch((e) => dispatch(getDailyVegetablesError(e.data)));
+};
+
+// Get Exotic vegetables Api call ##########################################
+const getExoticVegetablesLoading = (payload) => {
+  return {
+    type: types.GET_EXOTIC_VAGETABLES_LOADING,
+    payload,
+  };
+};
+const getExoticVegetablesSuccess = (payload) => {
+  return {
+    type: types.GET_EXOTIC_VAGETABLES_SUCCESS,
+    payload,
+  };
+};
+const getExoticVegetablesError = (payload) => {
+  return {
+    type: types.GET_EXOTIC_VAGETABLES_ERROR,
+    payload,
+  };
+};
+
+const getExoticVegetablesAPI = (payload) => (dispatch) => {
+  dispatch(getExoticVegetablesLoading(payload));
+  axios
+    .get(`/products?subCatagory=exoticVegetables`)
+    .then((r) => dispatch(getExoticVegetablesSuccess(r.data)))
+    .catch((e) => dispatch(getExoticVegetablesError(e.data)));
+};
+
+// Get cuts and peeled Api call ##########################################
+const getCutsPeeledLoading = (payload) => {
+  return {
+    type: types.GET_CUTS_PEELED_LOADING,
+    payload,
+  };
+};
+const getCutsPeeledSuccess = (payload) => {
+  return {
+    type: types.GET_CUTS_PEELED_SUCCESS,
+    payload,
+  };
+};
+const getCutsPeeledError = (payload) => {
+  return {
+    type: types.GET_CUTS_PEELED_ERROR,
+    payload,
+  };
+};
+
+const getCutsPeeledAPI = (payload) => (dispatch) => {
+  dispatch(getCutsPeeledLoading(payload));
+  axios
+    .get(`/products?subCatagory=cutsPeeled`)
+    .then((r) => dispatch(getCutsPeeledSuccess(r.data)))
+    .catch((e) => dispatch(getCutsPeeledError(e.data)));
+};
+// Get cobmo vegetables Api call ##########################################
+const getCombosVegetablesLoading = (payload) => {
+  return {
+    type: types.GET_COMBOS_VAGETABLES_LOADING,
+    payload,
+  };
+};
+const getCombosVegetablesSuccess = (payload) => {
+  return {
+    type: types.GET_COMBOS_VAGETABLES_SUCCESS,
+    payload,
+  };
+};
+const getCombosVegetablesError = (payload) => {
+  return {
+    type: types.GET_COMBOS_VAGETABLES_ERROR,
+    payload,
+  };
+};
+
+const getCombosVegetablesAPI = (payload) => (dispatch) => {
+  dispatch(getCombosVegetablesLoading(payload));
+  axios
+    .get(`/products?subCatagory=vegetableCombos`)
+    .then((r) => dispatch(getCombosVegetablesSuccess(r.data)))
+    .catch((e) => dispatch(getCombosVegetablesError(e.data)));
+};
+
+// Get herbs and leafs Api call ##########################################
+const getHerbsLeafsLoading = (payload) => {
+  return {
+    type: types.GET_HERBS_LEAFS_LOADING,
+    payload,
+  };
+};
+const getHerbsLeafsSuccess = (payload) => {
+  return {
+    type: types.GET_HERBS_LEAFS_SUCCESS,
+    payload,
+  };
+};
+const getHerbsLeafsError = (payload) => {
+  return {
+    type: types.GET_HERBS_LEAFS_ERROR,
+    payload,
+  };
+};
+
+const getHerbsLeafsAPI = (payload) => (dispatch) => {
+  dispatch(getHerbsLeafsLoading(payload));
+  axios
+    .get(`/products?subCatagory=herbsLeafies`)
+    .then((r) => dispatch(getHerbsLeafsSuccess(r.data)))
+    .catch((e) => dispatch(getHerbsLeafsError(e.data)));
+};
+
+
+// Get DRY FRUITS Api call ##########################################
+const getDryFruitsLoading = (payload) => {
+  return {
+    type: types.GET_DRY_FRUITS_LOADING,
+    payload,
+  };
+};
+const getDryFruitsSuccess = (payload) => {
+  return {
+    type: types.GET_DRY_FRUITS_SUCCESS,
+    payload,
+  };
+};
+const getDryFruitsError = (payload) => {
+  return {
+    type: types.GET_DRY_FRUITS_ERROR,
+    payload,
+  };
+};
+
+const getDryFruitsAPI = (payload) => (dispatch) => {
+  dispatch(getDryFruitsLoading(payload));
+  axios
+    .get(`/products?subCatagory=dryFruits`)
+    .then((r) => dispatch(getDryFruitsSuccess(r.data)))
+    .catch((e) => dispatch(getDryFruitsError(e.data)));
+};
+
+// Get BEST DEALS Api call ##########################################
 const getBestDealsLoading = (payload) => {
   return {
     type: types.GET_BEST_DEALS_LOADING,
@@ -112,4 +311,16 @@ const getBestDealsAPI = (payload) => (dispatch) => {
     .catch((e) => dispatch(getBestDealsError(e.data)));
 };
 
-export { getFreshFruitsAPI, getExoticFruitsAPI,getCombosFruitsAPI,getBestDealsAPI };
+export {
+  getMangoesAPI,
+  getFreshFruitsAPI,
+  getExoticFruitsAPI,
+  getCombosFruitsAPI,
+  getDailyVegetablesAPI,
+  getExoticVegetablesAPI,
+  getCutsPeeledAPI,
+  getCombosVegetablesAPI,
+  getHerbsLeafsAPI,
+  getDryFruitsAPI,
+  getBestDealsAPI,
+};

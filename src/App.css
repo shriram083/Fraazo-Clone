@@ -3,3 +3,25 @@
   border: 1px solid red;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Home page styling  */
+.carousel {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.carousel .control-dots {
+  position: inherit !important;
+  /* bottom: -20 !important; */
+}
+.carousel .control-dots li {
+  background: #49c19f !important;
+}
+.carousel button, .carousel .carousel-status  {
+  display: none;
+}
+.carousel-root >div:last-child{
+  display: none;
+}
