@@ -2321,5 +2321,78 @@
       "info": ""
     }
   ],
-  "cart": []
+  "cartItems": [
+    {
+      "productId": 1,
+      "count": 4,
+      "imgUrl": "https://images.fraazo.com/fraazo-prod/products/product_images/000/000/599/original/data/tr:w-256,h-256",
+      "name": "Pumpkin Disco",
+      "packSize": "250 g",
+      "price": 20,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "vegetables",
+      "subCatagory": "dailyVeggies",
+      "tooltipText": "",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 1
+    },
+    {
+      "productId": 3,
+      "count": 1,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/VBEE12.png/tr:w-256,h-256",
+      "name": "Beetroot",
+      "packSize": "500 g",
+      "price": 30,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "vegetables",
+      "subCatagory": "dailyVeggies",
+      "tooltipText": "",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 3
+    },
+    {
+      "productId": 90,
+      "count": 1,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/VPAP12.png/tr:w-256,h-256",
+      "name": "Papaya Raw",
+      "packSize": "1 pc",
+      "price": 33,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "fruits",
+      "subCatagory": "freshFruits",
+      "tooltipText": "(Aprox 600 to 800 g)",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 4
+    },
+    {
+      "productId": 111,
+      "count": 2,
+      "imgUrl": "https://images.fraazo.com/fraazo-prod/products/product_images/000/000/241/original/data/tr:w-256,h-256",
+      "name": "Apple Red Delicious",
+      "packSize": "4 Pc",
+      "price": 171,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "fruits",
+      "subCatagory": "freshFruits",
+      "tooltipText": "Approx. 500g- 650g",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 6
+    }
+  ]
 }
