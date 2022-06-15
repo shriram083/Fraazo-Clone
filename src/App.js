@@ -15,19 +15,23 @@ import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
 
+
 function App() {
   return (
     <Container className="App" maxW={"none"}>
       <Navbar />
+
       <Container
         style={{ padding: "60px 0 0 0", border: "1px solid blue" }}
         maxW="container.xl"
         boxSizing="border-box"
       >
+
         <Routes>
           <Route path="*" element={<ErrorPage />} />
           <Route path="/" element={<Home />} />
           <Route path="/Products" element={<Products />} />
+          <Route path={`/Products/:id`} element={<ProductDetails />} />
           <Route path="/Products/:id" element={<ProductDetails />} />
           <Route path="/myaccount/*" element={<SimpleSidebar />}>
             <Route path="myorders" element={<MyOrders />} />

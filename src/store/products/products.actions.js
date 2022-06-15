@@ -311,6 +311,38 @@ const getBestDealsAPI = (payload) => (dispatch) => {
     .catch((e) => dispatch(getBestDealsError(e.data)));
 };
 
+
+const getSingleProductLoading = (payload) => {
+  return {
+    type: types.GET_SINGLE_PRODUCT_LOADING,
+    payload: payload,
+  };
+}
+const getSingleProductSuccess = (payload) => {
+  return {
+    type: types.GET_SINGLE_PRODUCT_SUCCESS,
+    payload: payload,
+  };
+}
+const getSingleProductError = (payload) => {
+  return {
+    type: types.GET_SINGLE_PRODUCT_ERROR,
+    payload: payload,
+  };
+}
+
+const getSingleProductAPI = (id, dispatch) => {
+  dispatch(getSingleProductLoading());
+  axios
+    .get(`/products/${id}`)
+    .then((r) => {
+      console.log(r.data, "from reducer function")
+      dispatch(getSingleProductSuccess(r.data));
+    })
+    .catch((e) => dispatch(getSingleProductError(e.data)));
+}
+
+
 export {
   getMangoesAPI,
   getFreshFruitsAPI,
