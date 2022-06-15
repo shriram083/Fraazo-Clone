@@ -16,6 +16,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import {useLocation} from "react-router-dom";
 import AllProductsLayout from "../components/AllProductsLayout";
 import {
   getCombosFruitsAPI,
@@ -117,6 +118,9 @@ const Products = () => {
   const [porductsData, setProductsData] = useState(initialData);
   const [selected, setSelected] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  // console.log(location);
 
   const {
     mangoes,

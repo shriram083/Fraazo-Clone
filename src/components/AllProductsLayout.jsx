@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Image,
@@ -9,8 +9,16 @@ import {
   GridItem,
   Tooltip,
   Button,
+  Spinner,
 } from "@chakra-ui/react";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItemToCartAPI,
+  getCartItemAPI,
+  removeItemFromCartAPI,
+  updateCartItemAPI,
+} from "../store/cart/cart.actions";
 
 const ToolTip = styled.i`
   font-size: 12px;
@@ -36,6 +44,7 @@ const AddToCartBtn = styled.button`
     color: #fff;
   }
 `;
+
 const CartDec = styled.button`
   background-color: #fff;
   outline: 0;
@@ -75,7 +84,79 @@ const CardCount = styled.div`
 
 const AllProductsLayout = ({ product }) => {
   // console.log("porductsData", product);
-  const [count, setCount] = useState(0);
+  const [countValue, setCountValue] = useState(0);
+  const dispatch = useDispatch();
+  const { data: cartData, addCartItem } = useSelector((state) => state.cart);
+  console.log("cartData", cartData);
+
+  const handleAddToCart = (item) => {
+    const addData = {
+      productId: item.id,
+      count: 1,
+      imgUrl: item.imgUrl,
+      name: item.name,
+      packSize: item.packSize,
+      price: item.price,
+      strikePrice: item.strikePrice,
+      soldOut: item.soldOut,
+      notifyme: item.notifyme,
+      category: item.category,
+      subCatagory: item.subCatagory,
+      tooltipText: item.tooltipText,
+      benefits: item.benefits,
+      description: item.description,
+      info: item.info,
+    };
+    let ans = cartData.filter((data) => data.productId == item.id);
+    // console.log("ans is:", ans);
+    if (ans.length === 0) {
+      dispatch(addItemToCartAPI(addData));
+    }
+  };
+
+  const handleUpdate = (id, value) => {
+    let update = cartData.filter((data) => data.productId == id);
+    // let ans = cartData.find(someobject => someobject.productId == id).count = 10;
+    // console.log(update[0]);
+    // console.log("id:", ans)
+
+    if (value == 0) {
+      dispatch(removeItemFromCartAPI(update[0].id));
+    } else if (update.length !== 0) {
+      const payload = {
+        cartId: update[0].id,
+        newCount: value,
+      };
+      dispatch(updateCartItemAPI(payload));
+    }
+  };
+
+  // below function is used to remove cart item,
+  // In this all products page remove button is not available
+  // it will be used in cart page and single product page
+  const handleRemoveFromCart = (value) => {
+    let remove = cartData.filter((data) => data.productId == value);
+    // console.log("ans is:", remove,remove[0]?.id);
+    if (remove.length !== 0) {
+      // console.log(remove.id);
+      dispatch(removeItemFromCartAPI(remove[0].id));
+    }
+  };
+
+  //Below useEffect is used to fetch count of cart item
+  useEffect(() => {
+    const getCount = () => {
+      let ans = cartData.filter((data) => data.productId == product.id);
+      return ans[0] ? ans[0]?.count : 0;
+    };
+    setCountValue(Number(getCount()));
+  }, [product, cartData]);
+
+  //Below useEffect is used to fetch all cart items
+  useEffect(() => {
+    dispatch(getCartItemAPI());
+  }, [dispatch, getCartItemAPI]);
+
   return (
     <Box
       border={"1px solid #eee"}
@@ -137,20 +218,44 @@ const AllProductsLayout = ({ product }) => {
             </Flex>
           </Stack>
           <Stack>
-            {/* <AddToCartBtn>
-              <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
-              ADD
-            </AddToCartBtn> */}
-            <Flex>
-              <CartDec>
-                <i className="fa-solid fa-minus"></i>
-              </CartDec>
-              <CardCount>{count}</CardCount>
+            {countValue == 0 ? (
+              <AddToCartBtn key={product.id} onClick={() => handleAddToCart(product)}>
+                {addCartItem.loading ? (<Spinner size='xs' />):(<CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>)}
+                
+                ADD
+              </AddToCartBtn>
+            ) : (
+              <Flex>
+                <CartDec
+                  onClick={() =>
+                    handleUpdate(product?.id, Number(countValue) - 1)
+                  }
+                >
+                  <i className="fa-solid fa-minus"></i>
+                </CartDec>
+                <Tooltip
+                  hasArrow
+                  label={`Max Qty 5`}
+                  bg="#666"
+                  opacity={"0.5"}
+                  color="white"
+                  placement="top"
+                  fontWeight={400}
+                  fontSize="12px"
+                >
+                  <CardCount>{countValue}</CardCount>
+                </Tooltip>
 
-              <CartInc>
-                <i className="fa-solid fa-plus"></i>
-              </CartInc>
-            </Flex>
+                <CartInc
+                  disabled={countValue >= 5}
+                  onClick={() => {
+                    handleUpdate(product?.id, Number(countValue) + 1);
+                  }}
+                >
+                  <i className="fa-solid fa-plus"></i>
+                </CartInc>
+              </Flex>
+            )}
           </Stack>
         </Flex>
       </Box>

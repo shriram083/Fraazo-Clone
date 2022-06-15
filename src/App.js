@@ -13,13 +13,14 @@ import MyCredits from "./pages/MyCredits";
 import Invite from "./pages/Invite";
 import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <Container className="App" maxW={"none"}>
       <Navbar />
       <Container
-        style={{ paddingTop: "60px", border: "1px solid blue" }}
+        style={{ padding: "60px 0 0 0", border: "1px solid blue" }}
         maxW="container.xl"
         boxSizing="border-box"
       >
@@ -37,7 +38,10 @@ function App() {
 
           <Route path="/Checkout" element={<Checkout />} />
         </Routes>
+
+
       </Container>
+        <Footer />
     </Container>
   );
 }
