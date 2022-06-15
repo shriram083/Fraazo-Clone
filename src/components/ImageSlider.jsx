@@ -5,9 +5,11 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ImageSlider = ({ slides }) => {
   return (
-    <Carousel infiniteLoop autoPlay>
+    <Carousel infiniteLoop autoPlay showThumbs={true}>
       {slides.map((slide) => {
-        return <Image src={slide.img} height="auto" width="800px" />;
+        return (
+          <Image key={slide.id} src={slide.img} height="auto" width="800px" />
+        );
       })}
     </Carousel>
   );
