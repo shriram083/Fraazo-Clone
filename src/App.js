@@ -32,7 +32,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Products" element={<Products />} />
           <Route path={`/Products/:id`} element={<ProductDetails />} />
-          <Route path="/Products/:id" element={<ProductDetails />} />
           <Route path="/myaccount/*" element={<SimpleSidebar />}>
             <Route path="myorders" element={<MyOrders />} />
             <Route path="mycredits" element={<MyCredits />} />
@@ -45,7 +44,7 @@ function App() {
 
 
       </Container>
-        <Footer />
+      <Footer />
     </Container>
   );
 }

@@ -331,7 +331,7 @@ const getSingleProductError = (payload) => {
   };
 }
 
-const getSingleProductAPI = (id, dispatch) => {
+const getSingleProductAPI = (id) => (dispatch) => {
   dispatch(getSingleProductLoading());
   axios
     .get(`/products/${id}`)
@@ -355,4 +355,5 @@ export {
   getHerbsLeafsAPI,
   getDryFruitsAPI,
   getBestDealsAPI,
+  getSingleProductAPI
 };

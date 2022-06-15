@@ -87,7 +87,7 @@ const AllProductsLayout = ({ product }) => {
   const [countValue, setCountValue] = useState(0);
   const dispatch = useDispatch();
   const { data: cartData, addCartItem } = useSelector((state) => state.cart);
-  console.log("cartData", cartData);
+  // console.log("cartData", cartData);
 
   const handleAddToCart = (item) => {
     const addData = {
@@ -219,9 +219,15 @@ const AllProductsLayout = ({ product }) => {
           </Stack>
           <Stack>
             {countValue == 0 ? (
-              <AddToCartBtn key={product.id} onClick={() => handleAddToCart(product)}>
-                {addCartItem.loading ? (<Spinner size='xs' />):(<CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>)}
-                
+              <AddToCartBtn
+                key={product.id}
+                onClick={() => handleAddToCart(product)}
+              >
+                {addCartItem.loading ? (
+                  <Spinner size="xs" />
+                ) : (
+                  <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
+                )}
                 ADD
               </AddToCartBtn>
             ) : (
