@@ -4,16 +4,17 @@
   gap: 10px;
   align-items: center;
   position: relative;
-  height: 440px;
+  height: 310px;
   width: 100%;
-  margin: 40px auto;
+  /* margin: 40px auto; */
   overflow: hidden;
 }
 .container121 {
   position: relative;
-  height: 440px;
-  width: 90%;
-  margin: 40px auto;
+  /* height: 440px; */
+  width: 100%;
+  /* margin: 30px auto; */
+  margin-top: 30px;
 }
 .slide1 {
   position: absolute;
@@ -62,12 +63,12 @@
   width: 32px;
 }
 .btn-left12 {
-  left: 0;
-  top: 50%;
+  left: -10px;
+  top: 43%;
   transform: translateX(0, 100%);
 }
 .btn-right12 {
-  right: 0;
-  top: 50%;
+  right: -10px;
+  top: 43%;
   transform: translateX(0, 100%);
 }

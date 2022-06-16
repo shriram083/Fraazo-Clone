@@ -6,20 +6,67 @@ import {
   Heading,
   Text,
   Stack,
+  Divider,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DownloadApp from "../components/DownloadApp";
 import ImageSlider from "../components/ImageSlider";
+import ProductsSlider from "../components/SlidingComponent/ProductsSlider";
+import {
+  getBestDealsAPI,
+  getCombosFruitsAPI,
+  getDailyVegetablesAPI,
+  getDryFruitsAPI,
+  getExoticFruitsAPI,
+  getFreshFruitsAPI,
+  getMangoesAPI,
+} from "../store/products/products.actions";
 const sliderImg = [
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3763.png", id: 3763 },
-  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3765.png", id: 3765  },
-  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3766.png", id: 3766  },
-  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3767.png", id: 3767  },
+  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3765.png", id: 3765 },
+  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3766.png", id: 3766 },
+  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3767.png", id: 3767 },
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3768.png", id: 3768 },
-  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3770.png", id: 3770  },
+  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3770.png", id: 3770 },
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3671.png", id: 3771 },
 ];
 const Home = () => {
+  const dispatch = useDispatch();
+  const {
+    mangoes,
+    combosFruits,
+    exoticFruits,
+    freshFruits,
+    dailyVegetables,
+    exoticVegetables,
+    cutsPeeled,
+    combosVegetables,
+    herbsLeafs,
+    dryFruits,
+    bestDeals,
+  } = useSelector((state) => state.products);
+  // console.log(dryFruits.data);
+
+  useEffect(() => {
+    if (mangoes?.data?.length === 0) {
+      dispatch(getMangoesAPI());
+    }
+    if (freshFruits?.data?.length === 0) {
+      dispatch(getFreshFruitsAPI());
+    }
+
+    if (dailyVegetables?.data?.length === 0) {
+      dispatch(getDailyVegetablesAPI());
+    }
+
+    if (dryFruits?.data?.length === 0) {
+      dispatch(getDryFruitsAPI());
+    }
+    if (bestDeals?.data?.length === 0) {
+      dispatch(getBestDealsAPI());
+    }
+  }, [dispatch]);
   return (
     <Box>
       <Box p={"0 40px"}>
@@ -53,14 +100,14 @@ const Home = () => {
             </Flex>
           </Box>
         </Flex>
-        <Box>
-          <Text fontSize={"3xl"} textAlign={"left"}>
+        <Box mt={"50px"}>
+          <Text fontSize={"3xl"} textAlign={"left"} fontWeight={300}>
             BEST DEALS
           </Text>
-          <hr />
-          <br />
+          <Divider color={"#ccc"} />
+          <ProductsSlider data={bestDeals?.data} />
         </Box>
-        <Box>
+        <Box mt={"50px"}>
           <Flex gap={10}>
             <Stack>
               <Image src="https://images.fraazo.com/fraazo-prod/web/298.png" />
@@ -76,12 +123,40 @@ const Home = () => {
             </Stack>
           </Flex>
         </Box>
+        <Box mt={"50px"}>
+          <Text fontSize={"3xl"} textAlign={"left"} fontWeight={300}>
+            MANGOES
+          </Text>
+          <Divider color={"#ccc"} />
+          <ProductsSlider data={mangoes?.data} />
+        </Box>
+        <Box mt={"50px"}>
+          <Text fontSize={"3xl"} textAlign={"left"} fontWeight={300}>
+            FRUITS
+          </Text>
+          <Divider color={"#ccc"} />
+          <ProductsSlider data={freshFruits?.data} />
+        </Box>
+        <Box mt={"50px"}>
+          <Text fontSize={"3xl"} textAlign={"left"} fontWeight={300}>
+            VEGETABLES
+          </Text>
+          <Divider color={"#ccc"} />
+          <ProductsSlider data={dailyVegetables?.data} />
+        </Box>
+        <Box mt={"50px"}>
+          <Text fontSize={"3xl"} textAlign={"left"} fontWeight={300}>
+            DRY FRUITS
+          </Text>
+          <Divider color={"#ccc"} />
+          <ProductsSlider data={dryFruits?.data} />
+        </Box>
+
         <Box mt={10}></Box>
       </Box>
       <Box>
         <DownloadApp />
       </Box>
-      
     </Box>
   );
 };

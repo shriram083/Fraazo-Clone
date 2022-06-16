@@ -135,7 +135,7 @@ const Footer = () => {
                     <Box>
                       <Image src={emailIcon} />
                     </Box>
-                    <Box>support@fraazo.com</Box>
+                    <Box cursor={"pointer"}>support@fraazo.com</Box>
                   </Flex>
                   <Flex
                     fontSize={"16px"}
@@ -147,7 +147,7 @@ const Footer = () => {
                     <Box>
                       <Image src={phoneIcon} />
                     </Box>
-                    <Box>+91 9152291522</Box>
+                    <Box cursor={"pointer"}>+91 9152291522</Box>
                   </Flex>
                   <Box opacity={"0.7"} lineHeight={"28px"} mt={"20px"}>
                     {"102, We Work Vijay Diamond, A3 & B2,"}
