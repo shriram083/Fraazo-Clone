@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Tabs,
   TabList,
@@ -15,6 +15,9 @@ import CheckoutDeliveryType from "../components/CheckoutDeliveryType";
 
 const Checkout = () => {
   const [tabs, setTabs] = useState(0);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <div>

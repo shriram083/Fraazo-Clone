@@ -107,6 +107,7 @@ const ProductLayout = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    window.scroll(0, 0);
     dispatch(getSingleProductAPI(id));
     dispatch(getBestDealsAPI());
   }, [getSingleProductAPI, dispatch, id]);
