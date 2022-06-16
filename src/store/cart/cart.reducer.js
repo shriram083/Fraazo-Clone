@@ -5,12 +5,15 @@ const cartInitalState = {
   getCartItems: {
     loading: false,
     error: false,
+    totalPrice: 0,
   },
   addCartItem: {
+    id: "",
     loading: false,
     error: false,
   },
   updateCartItem: {
+    id: "",
     loading: false,
     error: false,
   },
@@ -29,6 +32,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         getCartItems: {
           loading: true,
           error: false,
+          totalPrice: "",
         },
       };
     case types.GET_CART_ITEMS_SUCCESS:
@@ -37,6 +41,9 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         getCartItems: {
           loading: false,
           error: false,
+          totalPrice: payload.reduce((acc, el)=>{
+            return acc + (Number(el.price) * Number(el.count));
+          },0)
         },
         data: payload,
       };
@@ -46,6 +53,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         getCartItems: {
           loading: false,
           error: true,
+          totalPrice: "",
         },
       };
     // Add To Cart Items ....
@@ -53,6 +61,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
       return {
         ...state,
         addCartItem: {
+          id: Number(payload?.productId),
           loading: true,
           error: false,
         },
@@ -61,6 +70,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
       return {
         ...state,
         addCartItem: {
+          id: Number(payload?.productId),
           loading: false,
           error: false,
         },
@@ -70,6 +80,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
       return {
         ...state,
         addCartItem: {
+          id: Number(payload?.productId),
           loading: false,
           error: true,
         },
@@ -79,6 +90,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
       return {
         ...state,
         updateCartItem: {
+          id: Number(payload?.productId),
           loading: true,
           error: false,
         },
@@ -89,8 +101,15 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         updateCartItem: {
           loading: false,
           error: false,
+          id: Number(payload?.productId),
         },
-        // data: [...state.data, payload],
+        // data: [...state.data, data],
+        // data: state.data.map((el) => {
+        //   if (el.productId == payload?.productId) {
+        //     el.count = payload?.count;
+        //   }
+        //   return el;
+        // }),
       };
     case types.UPDATE_CART_ITEMS_ERROR:
       return {
@@ -98,6 +117,7 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         updateCartItem: {
           loading: false,
           error: true,
+          id: Number(payload?.productId),
         },
       };
     // Remove Cart Items ....

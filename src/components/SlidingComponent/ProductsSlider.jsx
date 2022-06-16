@@ -2,19 +2,19 @@ import React, { useRef, useState } from "react";
 import Classes from "./ProductSlider.module.css";
 import AllProductsLayout from "./../AllProductsLayout";
 const ProductsSlider = ({ data }) => {
-  console.log(data);
+  // console.log(data);
 
   let [curSlide, setCurSlide] = useState(0);
-  let maxSlide = useRef(data.length - 1).current;
-  console.log(maxSlide);
+  let maxSlide = useRef(data?.length - 1).current;
+  // console.log(maxSlide);
 
   const btnRightHandler = () => {
-    console.log("hello,", curSlide, maxSlide);
+    // console.log("hello,", curSlide, maxSlide);
     if (curSlide === maxSlide) {
       setCurSlide(0);
     } else {
       setCurSlide(curSlide + 1);
-      console.log("n");
+      // console.log("n");
     }
   };
 
@@ -53,7 +53,7 @@ const ProductsSlider = ({ data }) => {
   return (
     <div className={Classes.container121}>
       <div className={Classes["container-12"]}>
-        {data.map((item, i) => {
+        {data?.map((item, i) => {
           return (
             <div
               key={i}
@@ -69,7 +69,7 @@ const ProductsSlider = ({ data }) => {
         <button
           className={`${Classes.btnd} ${Classes["btn-right12"]}`}
           onClick={btnRightHandler}
-          disabled={curSlide === 4}
+          disabled={(Number(curSlide) + 5) >= data?.length || curSlide === 4}
         >
           {BtnRight}
         </button>

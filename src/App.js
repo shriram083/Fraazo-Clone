@@ -15,34 +15,59 @@ import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
 import Footer from "./components/Footer";
 
-
 function App() {
   return (
     <Container className="App" maxW={"none"}>
       <Navbar />
 
       <Container
-        style={{ padding: "60px 0 0 0", border: "1px solid blue" }}
+        style={{ padding: "20px 0 0 0", border: "1px solid blue" }}
         maxW="container.xl"
+        mt={"88px"}
         boxSizing="border-box"
       >
-
         <Routes>
           <Route path="*" element={<ErrorPage />} />
           <Route path="/" element={<Home />} />
-          <Route path="/Products" element={<Products />} />
-          <Route path={`/Products/:id`} element={<ProductDetails />} />
+          <Route path="/products" element={<Products />} />
+          <Route path={`/products/:id`} element={<ProductDetails />} />
           <Route path="/myaccount/*" element={<SimpleSidebar />}>
             <Route path="myorders" element={<MyOrders />} />
             <Route path="mycredits" element={<MyCredits />} />
             <Route path="invite" element={<Invite />} />
             <Route path="support" element={<Support />} />
           </Route>
+          <Route
+            path="/products/mangoes/:subcategory"
+            element={<Products />}
+          />
+          <Route
+            path="/products/vegetables/:subcategory"
+            element={<Products />}
+          />
+          <Route
+            path="/products/fruits/:subcategory"
+            element={<Products />}
+          />
+          <Route
+            path="/products/herbs/:subcategory"
+            element={<Products />}
+          />
+          <Route
+            path="/products/dryfruits/:subcategory"
+            element={<Products />}
+          />
+          <Route
+            path="/products/kitchenstapels/:subcategory"
+            element={<Products />}
+          />
+          <Route
+            path="/products/category/:subcategory"
+            element={<Products />}
+          />
 
-          <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
-
-
       </Container>
       <Footer />
     </Container>
