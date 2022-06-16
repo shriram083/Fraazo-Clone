@@ -7,6 +7,7 @@ import {
   getSingleProductAPI,
 } from "../store/products/products.actions";
 import styled from "styled-components";
+import ProductsSlider from "./SlidingComponent/ProductsSlider";
 
 import {
   Text,
@@ -21,6 +22,7 @@ import {
   TabPanel,
   Stack,
   Spinner,
+  Divider,
 } from "@chakra-ui/react";
 import {
   addItemToCartAPI,
@@ -101,12 +103,10 @@ const ProductLayout = () => {
   const [countValue, setCountValue] = useState(0);
   const { data: cartData, addCartItem } = useSelector((state) => state.cart);
   const { singleProduct } = useSelector((state) => state.products);
-  // const best = useSelector((state) => state);
-  // console.log(state, "from state ");
+  const { data } = useSelector((state) => state.products.bestDeals);
   const { id } = useParams();
 
   useEffect(() => {
-    // getSingleProductAPI(id, dispatch);
     dispatch(getSingleProductAPI(id));
     dispatch(getBestDealsAPI());
   }, [getSingleProductAPI, dispatch, id]);
@@ -138,10 +138,6 @@ const ProductLayout = () => {
 
   const handleUpdate = (id, value) => {
     let update = cartData.filter((data) => data.productId == id);
-    // let ans = cartData.find(someobject => someobject.productId == id).count = 10;
-    // console.log(update[0]);
-    // console.log("id:", ans)
-
     if (value == 0) {
       dispatch(removeItemFromCartAPI(update[0].id));
     } else if (update.length !== 0) {
@@ -168,43 +164,46 @@ const ProductLayout = () => {
   }, [dispatch, getCartItemAPI]);
 
   return (
-    <div className={style.details_container}>
-      <div className={style.imgContainer}>
-        <img
-          src={singleProduct.imgUrl}
-          alt="an_images"
-          className={style.productImage}
-        />
-      </div>
-      <div className={style.details}>
-        <div className="data">
-          <h1 className={style.productname}>{singleProduct.name}</h1>
-          <Flex gap={2} alignItems="center" ml="20px">
-            <Text fontSize="13px" opacity={"0.7"}>
-              {singleProduct?.packSize}
-            </Text>
-            {singleProduct?.tooltipText && (
-              <Tooltip
-                hasArrow
-                label={singleProduct?.tooltipText}
-                bg="#666"
-                opacity={"0.5"}
-                color="white"
-                placement="top"
-                fontWeight={400}
-                fontSize="12px"
-              >
-                <ToolTip className="fa-solid fa-circle-info"></ToolTip>
-              </Tooltip>
-            )}
-          </Flex>
-          <Flex alignItems="felxStart" gap="10px">
-            <div className={style.price}>₹{singleProduct.price}</div>
-            <div className={style.strikeprice}>
-              {singleProduct.strikePrice ? "₹" + singleProduct.strikePrice : ""}
-            </div>
-          </Flex>
-          {/* <Flex alignItems="felxStart">
+    <>
+      <div className={style.details_container}>
+        <div className={style.imgContainer}>
+          <img
+            src={singleProduct.imgUrl}
+            alt="an_images"
+            className={style.productImage}
+          />
+        </div>
+        <div className={style.details}>
+          <div className="data">
+            <h1 className={style.productname}>{singleProduct.name}</h1>
+            <Flex gap={2} alignItems="center" ml="20px">
+              <Text fontSize="13px" opacity={"0.7"}>
+                {singleProduct?.packSize}
+              </Text>
+              {singleProduct?.tooltipText && (
+                <Tooltip
+                  hasArrow
+                  label={singleProduct?.tooltipText}
+                  bg="#666"
+                  opacity={"0.5"}
+                  color="white"
+                  placement="top"
+                  fontWeight={400}
+                  fontSize="12px"
+                >
+                  <ToolTip className="fa-solid fa-circle-info"></ToolTip>
+                </Tooltip>
+              )}
+            </Flex>
+            <Flex alignItems="felxStart" gap="10px">
+              <div className={style.price}>₹{singleProduct.price}</div>
+              <div className={style.strikeprice}>
+                {singleProduct.strikePrice
+                  ? "₹" + singleProduct.strikePrice
+                  : ""}
+              </div>
+            </Flex>
+            {/* <Flex alignItems="felxStart">
             <Button colorScheme="white" color="teal" onClick={addToCarthandler}>
               <div className={style.cartbtn}>
                 <img
@@ -216,94 +215,99 @@ const ProductLayout = () => {
               </div>
             </Button>
           </Flex> */}
-          <Stack>
-            {countValue == 0 ? (
-              <AddToCartBtn
-                key={singleProduct.id}
-                onClick={() => handleAddToCart(singleProduct)}
-              >
-                {addCartItem.loading ? (
-                  <Spinner size="xs" />
-                ) : (
-                  <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
-                )}
-                ADD
-              </AddToCartBtn>
-            ) : (
-              <Flex ml={"20px"}>
-                <CartDec
-                  onClick={() =>
-                    handleUpdate(singleProduct?.id, Number(countValue) - 1)
-                  }
+            <Stack>
+              {countValue == 0 ? (
+                <AddToCartBtn
+                  key={singleProduct.id}
+                  onClick={() => handleAddToCart(singleProduct)}
                 >
-                  <i className="fa-solid fa-minus"></i>
-                </CartDec>
-                <Tooltip
-                  hasArrow
-                  label={`Max Qty 5`}
-                  bg="#666"
-                  opacity={"0.5"}
-                  color="white"
-                  placement="top"
-                  fontWeight={400}
-                  fontSize="12px"
-                >
-                  <CardCount>{countValue}</CardCount>
-                </Tooltip>
+                  {addCartItem.loading ? (
+                    <Spinner size="xs" />
+                  ) : (
+                    <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
+                  )}
+                  ADD
+                </AddToCartBtn>
+              ) : (
+                <Flex ml={"20px"}>
+                  <CartDec
+                    onClick={() =>
+                      handleUpdate(singleProduct?.id, Number(countValue) - 1)
+                    }
+                  >
+                    <i className="fa-solid fa-minus"></i>
+                  </CartDec>
+                  <Tooltip
+                    hasArrow
+                    label={`Max Qty 5`}
+                    bg="#666"
+                    opacity={"0.5"}
+                    color="white"
+                    placement="top"
+                    fontWeight={400}
+                    fontSize="12px"
+                  >
+                    <CardCount>{countValue}</CardCount>
+                  </Tooltip>
 
-                <CartInc
-                  disabled={countValue >= 5}
-                  onClick={() => {
-                    handleUpdate(singleProduct?.id, Number(countValue) + 1);
-                  }}
-                >
-                  <i className="fa-solid fa-plus"></i>
-                </CartInc>
-              </Flex>
-            )}
-          </Stack>
-        </div>
-        <div className={style.tabs}>
-          <hr className={style.hr}></hr>
-          <Tabs>
-            <TabList>
-              <Tab>Description</Tab>
-              <Tab>Benifits</Tab>
-              <Tab>Info</Tab>
-            </TabList>
-            <TabPanels
-              className={style.tabColor}
-              h="200px"
-              borderBottomLeftRadius="20px"
-              borderBottomRightRadius="20px"
-            >
-              <TabPanel>
-                <p>
-                  {singleProduct.description.length !== 0
-                    ? singleProduct.description
-                    : "no details available"}
-                </p>
-              </TabPanel>
-              <TabPanel>
-                <p>
-                  {singleProduct.benefits.length !== 0
-                    ? singleProduct.benefits
-                    : "no details available"}
-                </p>
-              </TabPanel>
-              <TabPanel>
-                <p>
-                  {singleProduct.info.length !== 0
-                    ? singleProduct.info
-                    : "no details available"}
-                </p>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+                  <CartInc
+                    disabled={countValue >= 5}
+                    onClick={() => {
+                      handleUpdate(singleProduct?.id, Number(countValue) + 1);
+                    }}
+                  >
+                    <i className="fa-solid fa-plus"></i>
+                  </CartInc>
+                </Flex>
+              )}
+            </Stack>
+          </div>
+          <div className={style.tabs}>
+            <hr className={style.hr}></hr>
+            <Tabs>
+              <TabList>
+                <Tab>Description</Tab>
+                <Tab>Benifits</Tab>
+                <Tab>Info</Tab>
+              </TabList>
+              <TabPanels
+                className={style.tabColor}
+                h="200px"
+                borderBottomLeftRadius="20px"
+                borderBottomRightRadius="20px"
+              >
+                <TabPanel>
+                  <p>
+                    {singleProduct.description.length !== 0
+                      ? singleProduct.description
+                      : "no details available"}
+                  </p>
+                </TabPanel>
+                <TabPanel>
+                  <p>
+                    {singleProduct.benefits.length !== 0
+                      ? singleProduct.benefits
+                      : "no details available"}
+                  </p>
+                </TabPanel>
+                <TabPanel>
+                  <p>
+                    {singleProduct.info.length
+                      ? singleProduct.info
+                      : "no details available"}
+                  </p>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </div>
         </div>
       </div>
-    </div>
+      <Text fontSize="4xl" opacity="0.7" align="left" ml="75px">
+        BEST DEALS
+      </Text>
+      <Divider orientation="horizontal" borderColor="gray" w="88%" m="auto" />
+      {data ? <ProductsSlider data={data} /> : <></>}
+    </>
   );
 };
-
 export default ProductLayout;
