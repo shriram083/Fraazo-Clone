@@ -1,10 +1,23 @@
 .App {
   text-align: center;
   border: 1px solid red;
+  background-repeat: no-repeat;
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: gray;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(72, 70, 79);
 }
 
 /* Home page styling  */
@@ -19,9 +32,10 @@
 .carousel .control-dots li {
   background: #49c19f !important;
 }
-.carousel button, .carousel .carousel-status  {
+.carousel button,
+.carousel .carousel-status {
   display: none;
 }
-.carousel-root >div:last-child{
+.carousel-root > div:last-child {
   display: none;
 }

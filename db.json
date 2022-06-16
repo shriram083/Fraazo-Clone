@@ -2321,5 +2321,42 @@
       "info": ""
     }
   ],
-  "cart": []
+  "cartItems": [
+    {
+      "productId": 130,
+      "count": 2,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/FKES1.png/tr:w-256,h-256",
+      "name": "Mango Kesar",
+      "packSize": "1 kg",
+      "price": 135,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "mangoes",
+      "subCatagory": "mangoes",
+      "tooltipText": "",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 1
+    },
+    {
+      "productId": 137,
+      "count": 1,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/VTON12.png/tr:w-256,h-256,f-webp",
+      "name": "Tondli",
+      "packSize": "500 g",
+      "price": 21,
+      "strikePrice": 32,
+      "soldOut": "",
+      "notifyme": "",
+      "category": "bestDeals",
+      "subCatagory": "bestDeals",
+      "tooltipText": "",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 2
+    }
+  ]
 }

@@ -16,6 +16,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useParams, Link } from "react-router-dom";
 import AllProductsLayout from "../components/AllProductsLayout";
 import {
   getCombosFruitsAPI,
@@ -117,6 +118,11 @@ const Products = () => {
   const [porductsData, setProductsData] = useState(initialData);
   const [selected, setSelected] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  const { subcategory } = useParams();
+  console.log("path:", subcategory);
+  // console.log(location);
 
   const {
     mangoes,
@@ -241,30 +247,69 @@ const Products = () => {
   const sideMenu = [
     {
       category: "Mangoes",
-      subCategory: [{ item: "Mangoes", getProduct: handlegetMangoes }],
+      path: "mangoes",
+      subCategory: [
+        { subpath: "mangoes", item: "Mangoes", getProduct: handlegetMangoes },
+      ],
     },
     {
       category: "Fruits",
+      path: "fruits",
       subCategory: [
-        { item: "Fresh Fruits", getProduct: handlegetFreshFruits },
-        { item: "Exotic Fruits", getProduct: handlegetExoticFruits },
-        { item: "Fruit Combos", getProduct: handlegetCombosFruits },
+        {
+          subpath: "fresh-fruits",
+          item: "Fresh Fruits",
+          getProduct: handlegetFreshFruits,
+        },
+        {
+          subpath: "exotic-ruits",
+          item: "Exotic Fruits",
+          getProduct: handlegetExoticFruits,
+        },
+        {
+          subpath: "fruit-combos",
+          item: "Fruit Combos",
+          getProduct: handlegetCombosFruits,
+        },
       ],
     },
     {
       category: "Vegetables",
+      path: "vegetables",
       subCategory: [
-        { item: "Daily Veggies", getProduct: handlegetDailyVeggies },
-        { item: "Exotic Vegetables", getProduct: handlegetExoticVegetable },
-        { item: "Cuts, Peeled & Sprouts", getProduct: handlegetCutsPeeled },
-        { item: "Vegetable Combos", getProduct: handlegetVegetableCombos },
-        { item: "Herbs & Leafies", getProduct: handlegetHerbsLeafies },
+        {
+          subpath: "daily-veggies",
+          item: "Daily Veggies",
+          getProduct: handlegetDailyVeggies,
+        },
+        {
+          subpath: "exotic-vegetables",
+          item: "Exotic Vegetables",
+          getProduct: handlegetExoticVegetable,
+        },
+        {
+          subpath: "cuts-peeled-sprouts",
+          item: "Cuts, Peeled & Sprouts",
+          getProduct: handlegetCutsPeeled,
+        },
+        {
+          subpath: "vegetable-combos",
+          item: "Vegetable Combos",
+          getProduct: handlegetVegetableCombos,
+        },
+        {
+          subpath: "herbs-leafies",
+          item: "Herbs & Leafies",
+          getProduct: handlegetHerbsLeafies,
+        },
       ],
     },
     {
       category: "Dry Fruits",
+      path: "dryfruits",
       subCategory: [
         {
+          subpath: "premium-quality-dry-fruits",
           item: "Premium Quality Dry Fruits",
           getProduct: handlegetDryFruits,
         },
@@ -310,26 +355,28 @@ const Products = () => {
                       </AccordionButton>
                     </h2>
                     {item.subCategory.map((subItem) => (
-                      <AccordionPanel
-                        key={subItem.item}
-                        pb={4}
-                        fontSize="14px"
-                        textAlign={"left"}
-                        ml={2}
-                        border={"1px solid #eee"}
-                        borderLeft={"none"}
-                        onClick={() => subItem.getProduct(subItem.item)}
-                        cursor="pointer"
-                      >
-                        <Flex
-                          alignItems={"center"}
-                          justifyContent="left"
-                          gap={3}
+                      <Link to={`/products/${item.path}/${subItem.subpath}`} key={subItem.item}>
+                        <AccordionPanel
+                          key={subItem.item}
+                          pb={4}
+                          fontSize="14px"
+                          textAlign={"left"}
+                          ml={2}
+                          border={"1px solid #eee"}
+                          borderLeft={"none"}
+                          onClick={() => subItem.getProduct(subItem.item)}
+                          cursor="pointer"
                         >
-                          <i className="fa-solid fa-angle-right"></i>{" "}
-                          <Text>{subItem.item}</Text>
-                        </Flex>
-                      </AccordionPanel>
+                          <Flex
+                            alignItems={"center"}
+                            justifyContent="left"
+                            gap={3}
+                          >
+                            <i className="fa-solid fa-angle-right"></i>{" "}
+                            <Text>{subItem.item}</Text>
+                          </Flex>
+                        </AccordionPanel>
+                      </Link>
                     ))}
                   </>
                 )}

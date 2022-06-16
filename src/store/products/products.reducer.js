@@ -61,6 +61,22 @@ const initialState = {
     error: false,
     data: [],
   },
+  singleProduct: {
+    id: '',
+    imgUrl: '',
+    name: '',
+    packSize: '',
+    price: '',
+    strikePrice: '',
+    soldOut: '',
+    notifyme: '',
+    category: '',
+    subCatagory: '',
+    tooltipText: '',
+    benefits: '',
+    description: '',
+    info: ''
+  }
 };
 
 export const porductsReducer = (state = initialState, { type, payload }) => {
@@ -356,6 +372,13 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
           error: true,
         },
       };
+    // single product details case starts
+    case types.GET_SINGLE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        singleProduct: payload
+      };
+    // single product details case ends
 
     default:
       return state;
