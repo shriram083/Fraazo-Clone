@@ -21,6 +21,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { useRef } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const AddCartFlex = styled.div`
   display: flex;
   width: 100%;
@@ -42,6 +43,7 @@ const AddCartFlex = styled.div`
 const CartComponent = ({ isOpen, onOpen, onClose }) => {
   const size = "sm";
   const { data: cartData, getCartItems } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -83,7 +85,7 @@ const CartComponent = ({ isOpen, onOpen, onClose }) => {
                 variant="solid"
                 rounded={"50px"}
                 mt={"30px"}
-                onClick={()=>onClose()}
+                onClick={() => onClose()}
               >
                 Let's Shop!
               </Button>
@@ -116,6 +118,10 @@ const CartComponent = ({ isOpen, onOpen, onClose }) => {
                     marginRight={"20px"}
                     background="#5bc8ae"
                     _hover={{ color: "white", background: "#5bc8ae" }}
+                    onClick={() => {
+                      navigate("/checkout");
+                      onClose();
+                    }}
                   >
                     CHECKOUT
                   </Button>
