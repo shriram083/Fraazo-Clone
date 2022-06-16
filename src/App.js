@@ -13,7 +13,11 @@ import MyCredits from "./pages/MyCredits";
 import Invite from "./pages/Invite";
 import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
+
+import Login from "./pages/Login";
+
 import Footer from "./components/Footer";
+
 
 function App() {
   return (
@@ -66,7 +70,12 @@ function App() {
             element={<Products />}
           />
 
+
+          <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+
           <Route path="/checkout" element={<Checkout />} />
+
         </Routes>
       </Container>
       <Footer />
