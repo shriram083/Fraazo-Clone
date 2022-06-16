@@ -61,7 +61,7 @@ const CheckoutCart = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            border="2px dotted #feb687"
+            border="2px dashed #feb687"
             padding="10px"
             borderRadius="10px"
             bg="#fbf2ec"
