@@ -1,26 +1,15 @@
-import { Box, StackDivider, VStack } from '@chakra-ui/react'
 import React from 'react'
 
 const MyCredits = () => {
-  return (
-      <div style={{width:"100%", textAlign:"left"}} >
-          <h3>Your Credits</h3> 
-          {/* <VStack
-              divider={<StackDivider borderColor='gray.200' />}
-              spacing={4}
-              align='stretch'
-          >
-              <Box h='40px' bg='yellow.200' alignItems={"center"} textAlign={"center"} minW="">
-                  Available Fraazo Credit : ₹ 0
-              </Box>
-        
-          </VStack> */}
-          <Box bg='gray.50' w='100%' p={4}>
-              Available Fraazo Credit : ₹ 0
-          </Box>
-          <h1>No data found</h1>
-    </div>
-  )
+    return (
+        <div style={{ textAlign: "left", marginLeft: "40px" }} >
+            <div style={{ fontSize: "28px", paddingBottom: "18px" }}>Your Credits</div>
+            <div style={{ fontSize: "24px", boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px", padding: "5px 20px", borderRadius: "5px" }}>
+                Available Fraazo Credit : ₹ 0
+            </div>
+            <div style={{ fontSize: "44px", paddingTop: "10px" }}>No data found</div>
+        </div>
+    )
 }
 
 export default MyCredits

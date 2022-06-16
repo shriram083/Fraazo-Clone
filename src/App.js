@@ -13,6 +13,7 @@ import MyCredits from "./pages/MyCredits";
 import Invite from "./pages/Invite";
 import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -36,6 +37,8 @@ function App() {
           </Route>
 
           <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+
         </Routes>
       </Container>
     </Container>

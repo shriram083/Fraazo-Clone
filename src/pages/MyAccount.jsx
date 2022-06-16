@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
     IconButton,
     Box,
@@ -11,37 +11,31 @@ import {
     DrawerContent,
     Text,
     useDisclosure,
-    BoxProps,
-    FlexProps,
+    Image,
 } from '@chakra-ui/react';
 import {
-    FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
     FiMenu,
 } from 'react-icons/fi';
-import { IconType } from 'react-icons';
-import { ReactText } from 'react';
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import myorder from '../assets/myorder.png'
+import invite from '../assets/invite.png'
+import logout from '../assets/logout.svg'
+import mycredit from '../assets/mycredit.png'
+import support from '../assets/support.svg'
 
-// interface LinkItemProps {
-//     name: string;
-//     icon: IconType;
-// }
 const LinkItems = [
-    { name: 'My Orders', icon: FiHome, add:"myorders" },
-    { name: 'My Credits', icon: FiTrendingUp, add:"mycredits" },
-    { name: 'Invite A Friend', icon: FiStar, add:"invite" },
-    { name: 'Help & Support', icon: FiCompass, add:"support" },
-    { name: 'Logout', icon: FiSettings, add:"" },
+    { name: 'My Orders', icon: myorder, add:"myorders" },
+    { name: 'My Credits', icon: mycredit, add:"mycredits" },
+    { name: 'Invite A Friend', icon: invite, add:"invite" },
+    { name: 'Help & Support', icon: support, add:"support" },
+    { name: 'Logout', icon: logout, add:"" },
 ];
 
 export const SimpleSidebar =({ children }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
-        <div style={{display:"flex"}}>
+        <div style={{display:"grid",gridTemplateColumns:"18% 80%"}} >
             <Box minH="70vh" bg={useColorModeValue('gray.100', 'gray.900')}>
                 <SidebarContent
                     onClose={() => onClose}
@@ -76,6 +70,8 @@ export const SimpleSidebar =({ children }) => {
 
 const SidebarContent = ({ onClose, ...rest }) => {
     const navigate = useNavigate();
+    const mNumber = useSelector((otp) => otp.auth.otp.mobile)
+
     return (
         <Box
             bg={useColorModeValue('white', 'gray.900')}
@@ -83,16 +79,20 @@ const SidebarContent = ({ onClose, ...rest }) => {
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
             w={{ base: 'full', md: 60 }}
             pos="fixed"
-            h="full"
+            h="500px"
             {...rest}>
-            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-                <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-                    Logo
-                </Text>
+            <Flex h="40" alignItems="center" mx="8" justifyContent="space-between">
+                
+                <div>
+                    <img src="https://thumbs.dreamstime.com/b/funny-fruit-orange-isolated-cartoon-character-cute-white-background-vector-illustration-positive-friendly-emoticon-88087413.jpg" alt="" width="120px" borderRadius="50%" />
+                    <p>+91 { mNumber }</p>
+                </div>
+                
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
             {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon} onClick={() => navigate(`/myaccount/${link.add}`)}>
+                <NavItem key={link.name} onClick={() => navigate(`/myaccount/${link.add}`)}>
+                    <Image src={ link.icon } mr="10px"/>
                     {link.name}
                 </NavItem>
             ))}
