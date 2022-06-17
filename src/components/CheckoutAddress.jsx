@@ -332,7 +332,7 @@ const CheckoutCart = () => {
             <Text>{`${cartData.length} X Total Item Price`}</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice}`}</Text>
+              <Text>{`${getCartItems.withoutDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -346,7 +346,10 @@ const CheckoutCart = () => {
             <Text>Price Savings</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               -<TbCurrencyRupee />
-              <Text>30</Text>
+              <Text>
+                {getCartItems.withoutDiscountPrice -
+                  getCartItems.withDiscountPrice}
+              </Text>
             </Box>
           </Box>
           <hr />
@@ -359,7 +362,7 @@ const CheckoutCart = () => {
             <Text>Cart Amount</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice - 30}`}</Text>
+              <Text>{getCartItems.withDiscountPrice}</Text>
             </Box>
           </Box>
           <Box
@@ -392,7 +395,7 @@ const CheckoutCart = () => {
               fontSize="20px"
             >
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice}`}</Text>
+              <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
             </Box>
           </Box>
           <Box
@@ -410,7 +413,7 @@ const CheckoutCart = () => {
               <Text>Total</Text>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <TbCurrencyRupee />
-                <Text>{`${getCartItems.totalPrice}`}</Text>
+                <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
               </Box>
             </Box>
             <Heading fontSize="19px" fontWeight="500" cursor="pointer">
