@@ -2324,7 +2324,7 @@
   "cartItems": [
     {
       "productId": 134,
-      "count": 4,
+      "count": 1,
       "imgUrl": "https://images.fraazo.com/fraazo-master/BONI11.png/tr:w-256,h-256,f-webp",
       "name": "Onion",
       "packSize": "1 kg",
@@ -2338,16 +2338,16 @@
       "benefits": "",
       "description": "",
       "info": "",
-      "id": 4
+      "id": 1
     },
     {
-      "productId": 135,
-      "count": 2,
-      "imgUrl": "https://images.fraazo.com/fraazo-prod/images/images/000/006/624/original/data/tr:w-256,h-256,f-webp",
-      "name": "Lady's Finger (Bhindi / Okra / Bhendi) / Bhinda,Vendaikk...",
-      "packSize": "500 g",
-      "price": 12,
-      "strikePrice": 28,
+      "productId": 133,
+      "count": 1,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/VCHI22.png/tr:w-256,h-256,f-webp",
+      "name": "Chillies Green",
+      "packSize": "100 g",
+      "price": 9,
+      "strikePrice": 13,
       "soldOut": "",
       "notifyme": "",
       "category": "bestDeals",
@@ -2356,25 +2356,7 @@
       "benefits": "",
       "description": "",
       "info": "",
-      "id": 5
-    },
-    {
-      "productId": 127,
-      "count": 2,
-      "imgUrl": "https://images.fraazo.com/fraazo-prod/images/images/000/004/597/original/data/tr:w-256,h-256",
-      "name": "Mango Totapuri Raw",
-      "packSize": "1 Kg",
-      "price": 81,
-      "strikePrice": "",
-      "soldOut": "",
-      "notifyme": "",
-      "category": "mangoes",
-      "subCatagory": "mangoes",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 6
+      "id": 2
     }
   ]
 }
