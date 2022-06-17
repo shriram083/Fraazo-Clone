@@ -2321,60 +2321,7 @@
       "info": ""
     }
   ],
-  "cartItems": [
-    {
-      "productId": 133,
-      "count": 4,
-      "imgUrl": "https://images.fraazo.com/fraazo-master/VCHI22.png/tr:w-256,h-256,f-webp",
-      "name": "Chillies Green",
-      "packSize": "100 g",
-      "price": 9,
-      "strikePrice": 13,
-      "soldOut": "",
-      "notifyme": "",
-      "category": "bestDeals",
-      "subCatagory": "bestDeals",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 1
-    },
-    {
-      "productId": 134,
-      "count": 2,
-      "imgUrl": "https://images.fraazo.com/fraazo-master/BONI11.png/tr:w-256,h-256,f-webp",
-      "name": "Onion",
-      "packSize": "1 kg",
-      "price": 11,
-      "strikePrice": 24,
-      "soldOut": "",
-      "notifyme": "",
-      "category": "bestDeals",
-      "subCatagory": "bestDeals",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 2
-    },
-    {
-      "productId": 135,
-      "count": 2,
-      "imgUrl": "https://images.fraazo.com/fraazo-prod/images/images/000/006/624/original/data/tr:w-256,h-256,f-webp",
-      "name": "Lady's Finger (Bhindi / Okra / Bhendi) / Bhinda,Vendaikk...",
-      "packSize": "500 g",
-      "price": 12,
-      "strikePrice": 28,
-      "soldOut": "",
-      "notifyme": "",
-      "category": "bestDeals",
-      "subCatagory": "bestDeals",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 3
-    }
-  ]
+
+  "cartItems": []
+
 }

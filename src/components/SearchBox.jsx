@@ -28,6 +28,7 @@ import {
   updateCartItemAPI,
 } from "../store/cart/cart.actions";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 
 const ToolTip = styled.i`
   font-size: 12px;
@@ -171,7 +172,10 @@ const SearchBox = () => {
       //   fetchResult(value);
     }
   };
-  const handleOnChange1 = (e) => {
+  const id = useRef(null);
+  const debounce = (e, fetchResult, delay) => {
+    console.log("value", e.target.value);
+
     const { name, value } = e.target;
     setQuery(value);
     console.log("query", value);
@@ -180,10 +184,14 @@ const SearchBox = () => {
       onClose();
       // setQuery("");
     } else if (value.length >= 3) {
-      fetchResult(value);
+      if (id.current) {
+        clearTimeout(id.current);
+      }
+      id.current = setTimeout(function () {
+        fetchResult(value);
+      }, delay);
     }
   };
-
   const fetchResult = (query) => {
     axios
       .get(`/products?q=${query}`)
@@ -251,6 +259,7 @@ const SearchBox = () => {
       <SearchBar>
         <Input
           flex={1}
+          pl={"5px"}
           type="search"
           variant="unstyled"
           value={query}
@@ -261,7 +270,7 @@ const SearchBox = () => {
         {query?.length == 0 && SearchIcon}
       </SearchBar>
       <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
-        {query.length >= 2 && <ModalOverlay opacity={"0.5"}/>}
+        {query.length >= 2 && <ModalOverlay opacity={"0.5"} />}
         <ModalContent mt={5} rounded={"24px 24px 5px 5px"} bg={"#f9f9f9"}>
           <Input
             type={"search"}
@@ -269,10 +278,15 @@ const SearchBox = () => {
             h={"50px"}
             p={"0 20px"}
             value={query}
-            onChange={handleOnChange1}
+            onChange={(e) => debounce(e, fetchResult, 800)}
           />
 
-          <ModalBody p={"0"} maxH={"400px"} overflowX={"hidden"} overflowY={"auto"}>
+          <ModalBody
+            p={"0"}
+            maxH={"400px"}
+            overflowX={"hidden"}
+            overflowY={"auto"}
+          >
             {searchData?.length == 0 ? (
               <Box fontSize={"14px"} textAlign={"center"} p={"10px 0"}>
                 No Results Found
@@ -303,21 +317,17 @@ const SearchBox = () => {
                           alignItems={"center"}
                           // gap={2}
                         >
-                          <Box
-                           
-                            pr={"20px"}
-                           
-                          >
-                          <Box
-                            w={"66px"}
-                            h={"66px"}
-                            p={"5px"}
-                            bg={"#f9f9f9"}
-                            border={"1px solid #eee"}
-                            rounded={"4px"}
-                          >
-                            <Image src={item?.imgUrl} height={"100%"} />
-                          </Box>
+                          <Box pr={"20px"}>
+                            <Box
+                              w={"66px"}
+                              h={"66px"}
+                              p={"5px"}
+                              bg={"#f9f9f9"}
+                              border={"1px solid #eee"}
+                              rounded={"4px"}
+                            >
+                              <Image src={item?.imgUrl} height={"100%"} />
+                            </Box>
                           </Box>
 
                           <Box
@@ -375,17 +385,13 @@ const SearchBox = () => {
                         </Flex>
                       </Link>
 
-                      <Flex justifyContent={"space-between"} w={"70px"}>
+                      <Flex justifyContent={"space-between"} w={"82px"}>
                         <Stack>
                           {!!item?.soldOut ? (
-                            <Text color={"red.300"}>Out of Stock</Text>
+                            <Text fontSize={"13px"} color={"red.300"}>Out of Stock</Text>
                           ) : (
-                            <Flex
-                              
-                              justifyContent="center"
-                              alignItems={"center"}
-                            >
-                              <Stack >
+                            <Flex justifyContent="center" alignItems={"center"}>
+                              <Stack>
                                 {getCount(item) == 0 ? (
                                   <AddToCartBtn
                                     key={item.id}
