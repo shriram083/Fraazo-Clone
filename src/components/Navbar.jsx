@@ -1,10 +1,22 @@
 import React from "react";
 import styled from "styled-components";
 import HomeLogo from "../assets/homeLogo.svg";
-import { Box, Button, Flex, Image, Tag, Text, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Image,
+  Input,
+  Tag,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import CartComponent from "./CartComponents/CartComponent";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import axios from "axios";
+import SearchBox from "./SearchBox";
 // const Flex = styled.div`
 //   display: flex;
 //   justify-content: space-evenly;
@@ -93,24 +105,7 @@ const cartIcon = (
     ></path>
   </svg>
 );
-const SearchIcon = (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-6 w-6"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="#4fbb90"
-    strokeWidth={3}
-    height={"16px"}
-    width={"16px"}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-    />
-  </svg>
-);
+
 const creditIcon = (
   // <svg
   //   xmlns="http://www.w3.org/2000/svg"
@@ -209,6 +204,7 @@ const locationSvg = (
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: cartData } = useSelector((state) => state.cart);
+
   return (
     <Box
       boxShadow={"base"}
@@ -228,30 +224,31 @@ const Navbar = () => {
         m={"auto"}
         p={"0 35px"}
       >
-        <InnerDivFlex>
-          <Link to="/">
-            <Image src={HomeLogo} alt="logo" w={"120px"}  />
-          </Link>
-        </InnerDivFlex>
-        <Flex
-          alignItems={"center"}
-          gap={2}
-          color={"#999"}
-          _hover={{ color: "black" }}
-        >
-          <Box w={"12px"} h={"12px"} mt="-5px"> {locationSvg}</Box>
+        <Flex gap={10}>
+          <InnerDivFlex>
+            <Link to="/">
+              <Image src={HomeLogo} alt="logo" w={"120px"} />
+            </Link>
+          </InnerDivFlex>
+          <Flex
+            alignItems={"center"}
+            gap={2}
+            color={"#999"}
+            _hover={{ color: "black" }}
+          >
+            <Box w={"12px"} h={"12px"} mt="-5px">
+              {" "}
+              {locationSvg}
+            </Box>
 
-          <Text fontSize={"13px"} fontWeight={500}>
-            Powai
-          </Text>
+            <Text fontSize={"13px"} fontWeight={500}>
+              Powai
+            </Text>
+          </Flex>
         </Flex>
-        <SearchBar>
-          <input
-            type="text"
-            placeholder="Find fresh vegetables, fruits and dairy..."
-          />
-          {SearchIcon}
-        </SearchBar>
+        
+        <SearchBox />
+
         <Flex justifyContent={"space-evenly"} gap={8}>
           <Button
             position={"relative"}
