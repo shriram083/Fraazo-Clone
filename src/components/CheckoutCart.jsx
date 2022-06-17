@@ -82,7 +82,7 @@ const CheckoutCart = () => {
             <Text>{`${cartData.length} X Total Item Price`}</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice}`}</Text>
+              <Text>{`${getCartItems.withoutDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -96,11 +96,10 @@ const CheckoutCart = () => {
             <Text>Price Savings</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               -<TbCurrencyRupee />
-              <Text>
-                {(getCartItems.totalPrice * 20) / 100 > 30
-                  ? "30"
-                  : `${Math.floor((getCartItems.totalPrice * 20) / 100)}`}
-              </Text>
+              <Text>{`${
+                getCartItems.withoutDiscountPrice -
+                getCartItems.withDiscountPrice
+              }`}</Text>
             </Box>
           </Box>
           <hr />
@@ -113,10 +112,7 @@ const CheckoutCart = () => {
             <Text>Cart Amount</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${
-                getCartItems.totalPrice -
-                Math.floor((getCartItems.totalPrice * 20) / 100)
-              }`}</Text>
+              <Text>{`${getCartItems.withDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -147,7 +143,7 @@ const CheckoutCart = () => {
                 style={{ color: "red" }}
                 fontSize="20px"
                 fontWeight="500"
-              >{`${getCartItems.totalPrice}`}</Text>
+              >{`${getCartItems.withDiscountPrice + 30}`}</Text>
             </Box>
           </Box>
           <Box
@@ -165,7 +161,7 @@ const CheckoutCart = () => {
               <Text>Total</Text>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <TbCurrencyRupee />
-                <Text>{`${getCartItems.totalPrice}`}</Text>
+                <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
               </Box>
             </Box>
             <Heading fontSize="18px" cursor="pointer">

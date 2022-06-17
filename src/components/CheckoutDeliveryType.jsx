@@ -104,7 +104,7 @@ const CheckoutCart = () => {
             <Text>{`${cartData.length} X Total Item Price`}</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice}`}</Text>
+              <Text>{`${getCartItems.withoutDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -122,7 +122,10 @@ const CheckoutCart = () => {
               color="#43c6ac"
             >
               -<TbCurrencyRupee />
-              <Text>30</Text>
+              <Text>
+                {getCartItems.withoutDiscountPrice -
+                  getCartItems.withDiscountPrice}
+              </Text>
             </Box>
           </Box>
           <hr />
@@ -135,7 +138,7 @@ const CheckoutCart = () => {
             <Text>Cart Amount</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice - 30}`}</Text>
+              <Text>{getCartItems.withDiscountPrice}</Text>
             </Box>
           </Box>
           <Box
@@ -168,7 +171,7 @@ const CheckoutCart = () => {
               fontSize="20px"
             >
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice}`}</Text>
+              <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
             </Box>
           </Box>
           <Box

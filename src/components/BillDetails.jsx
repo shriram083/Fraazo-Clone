@@ -33,7 +33,7 @@ export const BillDetails = () => {
           <Text>{`${cartData.length} X Total Item Price`}</Text>
           <Box display="flex" flexDirection="row" alignItems="center">
             <TbCurrencyRupee />
-            <Text>{`${getCartItems.totalPrice}`}</Text>
+            <Text>{`${getCartItems.withoutDiscountPrice}`}</Text>
           </Box>
         </Box>
         <Box
@@ -51,7 +51,10 @@ export const BillDetails = () => {
             color="#43c6ac"
           >
             -<TbCurrencyRupee />
-            <Text>30</Text>
+            <Text>
+              {getCartItems.withoutDiscountPrice -
+                getCartItems.withDiscountPrice}
+            </Text>
           </Box>
         </Box>
         <hr />
@@ -64,7 +67,7 @@ export const BillDetails = () => {
           <Text>Cart Amount</Text>
           <Box display="flex" flexDirection="row" alignItems="center">
             <TbCurrencyRupee />
-            <Text>{`${getCartItems.totalPrice - 30}`}</Text>
+            <Text>{getCartItems.withDiscountPrice}</Text>
           </Box>
         </Box>
         <Box
@@ -97,7 +100,7 @@ export const BillDetails = () => {
             fontSize="20px"
           >
             <TbCurrencyRupee />
-            <Text>{`${getCartItems.totalPrice}`}</Text>
+            <Text>{getCartItems.withDiscountPrice + 30}</Text>
           </Box>
         </Box>
         <Box
