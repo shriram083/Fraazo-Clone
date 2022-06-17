@@ -50,7 +50,6 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
               acc += Number(el.price) * Number(el.count);
             }
             return acc;
-            return acc + Number(el.price) * Number(el.count);
           }, 0),
           withDiscountPrice: payload.reduce((acc, el) => {
             if (el.strikePrice) {
