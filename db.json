@@ -2321,42 +2321,5 @@
       "info": ""
     }
   ],
-  "cartItems": [
-    {
-      "productId": 134,
-      "count": 2,
-      "imgUrl": "https://images.fraazo.com/fraazo-master/BONI11.png/tr:w-256,h-256,f-webp",
-      "name": "Onion",
-      "packSize": "1 kg",
-      "price": 11,
-      "strikePrice": 24,
-      "soldOut": "",
-      "notifyme": "",
-      "category": "bestDeals",
-      "subCatagory": "bestDeals",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 2
-    },
-    {
-      "productId": 89,
-      "count": 1,
-      "imgUrl": "https://images.fraazo.com/fraazo-prod/products/product_images/000/000/157/original/data/tr:w-256,h-256",
-      "name": "Pineapple",
-      "packSize": "800g -1 Kg",
-      "price": 107,
-      "strikePrice": "",
-      "soldOut": "",
-      "notifyme": "",
-      "category": "fruits",
-      "subCatagory": "freshFruits",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 3
-    }
-  ]
+  "cartItems": []
 }
