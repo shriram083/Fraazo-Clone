@@ -5,7 +5,8 @@ const cartInitalState = {
   getCartItems: {
     loading: false,
     error: false,
-    totalPrice: 0,
+    withoutDiscountPrice: 0,
+    withDiscountPrice: 0,
   },
   addCartItem: {
     id: "",
@@ -32,7 +33,8 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         getCartItems: {
           loading: true,
           error: false,
-          totalPrice: "",
+          withoutDiscountPrice: "",
+          withDiscountPrice: "",
         },
       };
     case types.GET_CART_ITEMS_SUCCESS:
@@ -41,9 +43,24 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         getCartItems: {
           loading: false,
           error: false,
-          totalPrice: payload.reduce((acc, el)=>{
-            return acc + (Number(el.price) * Number(el.count));
-          },0)
+          withoutDiscountPrice: payload.reduce((acc, el) => {
+            if (el.strikePrice) {
+              acc += Number(el.strikePrice) * Number(el.count);
+            } else {
+              acc += Number(el.price) * Number(el.count);
+            }
+            return acc;
+            return acc + Number(el.price) * Number(el.count);
+          }, 0),
+          withDiscountPrice: payload.reduce((acc, el) => {
+            if (el.strikePrice) {
+              let save = el.strikePrice - el.price;
+              acc += Number(el.strikePrice) * Number(el.count) - save;
+            } else {
+              acc += Number(el.price) * Number(el.count);
+            }
+            return acc;
+          }, 0),
         },
         data: payload,
       };
@@ -53,7 +70,8 @@ export const cartReducer = (state = cartInitalState, { type, payload }) => {
         getCartItems: {
           loading: false,
           error: true,
-          totalPrice: "",
+          withoutDiscountPrice: "",
+          withDiscountPrice: ",",
         },
       };
     // Add To Cart Items ....

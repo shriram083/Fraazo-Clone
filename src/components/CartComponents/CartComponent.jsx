@@ -44,7 +44,8 @@ const CartComponent = ({ isOpen, onOpen, onClose }) => {
   const size = "sm";
   const { data: cartData, getCartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
-
+  // console.log("total:", getCartItems.withoutDiscountPrice);
+  // console.log("discount:", getCartItems.withDiscountPrice);
   return (
     <>
       <Drawer onClose={onClose} isOpen={isOpen} size={size}>
@@ -106,7 +107,7 @@ const CartComponent = ({ isOpen, onOpen, onClose }) => {
                       <Spinner color="red.500" />
                     ) : (
                       <Text color={"#ff6d11"}>
-                        {`₹ ${getCartItems.totalPrice}`}{" "}
+                        {`₹ ${getCartItems.withDiscountPrice}`}{" "}
                       </Text>
                     )}
                   </Box>

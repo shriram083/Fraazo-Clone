@@ -17,13 +17,13 @@ const initialState = {
     error: false,
     data: [],
   },
-  combosFruits: {
+  fruitCombos: {
     loading: false,
     error: false,
     data: [],
   },
   // vegetables
-  dailyVegetables: {
+  dailyVeggies: {
     loading: false,
     error: false,
     data: [],
@@ -33,24 +33,24 @@ const initialState = {
     error: false,
     data: [],
   },
-  cutsPeeled: {
+  cutsPeeledSprouts: {
     loading: false,
     error: false,
     data: [],
   },
-  combosVegetables: {
+  vegetableCombos: {
     loading: false,
     error: false,
     data: [],
   },
-  herbsLeafs: {
+  herbsLeafies: {
     loading: false,
     error: false,
     data: [],
   },
 
   // fry fruits
-  dryFruits: {
+  premiumQualityDryFruits: {
     loading: false,
     error: false,
     data: [],
@@ -163,7 +163,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_COMBOS_FRUITS_LOADING:
       return {
         ...state,
-        combosFruits: {
+        fruitCombos: {
           loading: true,
           error: false,
         },
@@ -171,7 +171,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_COMBOS_FRUITS_SUCCESS:
       return {
         ...state,
-        combosFruits: {
+        fruitCombos: {
           loading: false,
           error: false,
           data: payload,
@@ -180,7 +180,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_COMBOS_FRUITS_ERROR:
       return {
         ...state,
-        combosFruits: {
+        fruitCombos: {
           loading: false,
           error: true,
         },
@@ -189,7 +189,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_DAILY_VAGETABLES_LOADING:
       return {
         ...state,
-        dailyVegetables: {
+        dailyVeggies: {
           loading: true,
           error: false,
         },
@@ -197,7 +197,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_DAILY_VAGETABLES_SUCCESS:
       return {
         ...state,
-        dailyVegetables: {
+        dailyVeggies: {
           loading: false,
           error: false,
           data: payload,
@@ -206,7 +206,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_DAILY_VAGETABLES_ERROR:
       return {
         ...state,
-        dailyVegetables: {
+        dailyVeggies: {
           loading: false,
           error: true,
         },
@@ -242,7 +242,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_CUTS_PEELED_LOADING:
       return {
         ...state,
-        cutsPeeled: {
+        cutsPeeledSprouts: {
           loading: true,
           error: false,
         },
@@ -250,7 +250,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_CUTS_PEELED_SUCCESS:
       return {
         ...state,
-        cutsPeeled: {
+        cutsPeeledSprouts: {
           loading: false,
           error: false,
           data: payload,
@@ -259,7 +259,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_CUTS_PEELED_ERROR:
       return {
         ...state,
-        cutsPeeled: {
+        cutsPeeledSprouts: {
           loading: false,
           error: true,
         },
@@ -269,7 +269,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_COMBOS_VAGETABLES_LOADING:
       return {
         ...state,
-        combosVegetables: {
+        vegetableCombos: {
           loading: true,
           error: false,
         },
@@ -277,7 +277,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_COMBOS_VAGETABLES_SUCCESS:
       return {
         ...state,
-        combosVegetables: {
+        vegetableCombos: {
           loading: false,
           error: false,
           data: payload,
@@ -286,7 +286,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_COMBOS_VAGETABLES_ERROR:
       return {
         ...state,
-        combosVegetables: {
+        vegetableCombos: {
           loading: false,
           error: true,
         },
@@ -296,7 +296,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_HERBS_LEAFS_LOADING:
       return {
         ...state,
-        herbsLeafs: {
+        herbsLeafies: {
           loading: true,
           error: false,
         },
@@ -304,7 +304,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_HERBS_LEAFS_SUCCESS:
       return {
         ...state,
-        herbsLeafs: {
+        herbsLeafies: {
           loading: false,
           error: false,
           data: payload,
@@ -313,7 +313,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_HERBS_LEAFS_ERROR:
       return {
         ...state,
-        herbsLeafs: {
+        herbsLeafies: {
           loading: false,
           error: true,
         },
@@ -323,7 +323,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_DRY_FRUITS_LOADING:
       return {
         ...state,
-        dryFruits: {
+        premiumQualityDryFruits: {
           loading: true,
           error: false,
         },
@@ -331,7 +331,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_DRY_FRUITS_SUCCESS:
       return {
         ...state,
-        dryFruits: {
+        premiumQualityDryFruits: {
           loading: false,
           error: false,
           data: payload,
@@ -340,7 +340,7 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
     case types.GET_DRY_FRUITS_ERROR:
       return {
         ...state,
-        dryFruits: {
+        premiumQualityDryFruits: {
           loading: false,
           error: true,
         },

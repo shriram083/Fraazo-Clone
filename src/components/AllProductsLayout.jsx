@@ -165,9 +165,9 @@ const AllProductsLayout = ({ product }) => {
 
   //Below useEffect is used to fetch all cart items
   useEffect(() => {
-    dispatch(getCartItemAPI());
+    // dispatch(getCartItemAPI());
     setIsSkeleten(false);
-  }, [dispatch]);
+  }, []);
 
   return (
     <Skeleton
@@ -180,12 +180,13 @@ const AllProductsLayout = ({ product }) => {
         transition={".3s"}
         rounded={4}
         height="300px"
+        opacity={product?.soldOut ? "0.6" : "1"}
         _hover={{
           transition: ".6s",
           boxShadow: "0 0 9px 0 rgb(0 0 0 / 30%)",
         }}
       >
-        <Box p={"10px 20px 0"} bg={"#f9f9f9"} rounded={4}>
+        <Box p={"10px 20px 0"} bg={"#f9f9f9"} rounded={4} position={"relative"}>
           <Link
             to={`/products/${product.id}`}
             style={{ textDecoration: "none" }}
@@ -198,6 +199,21 @@ const AllProductsLayout = ({ product }) => {
               m={"auto"}
             />
           </Link>
+          {product?.soldOut && (
+            <Box
+              opacity={"0.5"}
+              fontSize={"14px"}
+              color={"#f4b21e"}
+              bg={"#fff4db"}
+              w="100%"
+              position={"absolute"}
+              bottom="0"
+              left="0"
+              right="0"
+            >
+              {product?.soldOut}
+            </Box>
+          )}
         </Box>
         <Box p={"12px"} textAlign="left">
           <Box
@@ -239,59 +255,63 @@ const AllProductsLayout = ({ product }) => {
                 </Text>
               </Flex>
             </Stack>
-            <Stack>
-              {countValue == 0 ? (
-                <AddToCartBtn
-                  key={product.id}
-                  onClick={() => handleAddToCart(product)}
-                >
-                  {addCartItem.loading && addCartItem.id === product.id ? (
-                    <Spinner speed="0.65s" size="xs" />
-                  ) : (
-                    <Flex>
-                      <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
-                      ADD
-                    </Flex>
-                  )}
-                </AddToCartBtn>
-              ) : (
-                <Flex>
-                  <CartDec
-                    onClick={() =>
-                      handleUpdate(product?.id, Number(countValue) - 1)
-                    }
+            {product?.soldOut ? (
+              ""
+            ) : (
+              <Stack>
+                {countValue == 0 ? (
+                  <AddToCartBtn
+                    key={product.id}
+                    onClick={() => handleAddToCart(product)}
                   >
-                    <i className="fa-solid fa-minus"></i>
-                  </CartDec>
-                  <Tooltip
-                    hasArrow
-                    label={`Max Qty 5`}
-                    bg="#666"
-                    opacity={"0.5"}
-                    color="white"
-                    placement="top"
-                    fontWeight={400}
-                    fontSize="12px"
-                  >
-                    {updateCartItem.loading &&
-                    updateCartItem.id === product.id ? (
+                    {addCartItem.loading && addCartItem.id === product.id ? (
                       <Spinner speed="0.65s" size="xs" />
                     ) : (
-                      <CardCount>{countValue}</CardCount>
+                      <Flex>
+                        <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
+                        ADD
+                      </Flex>
                     )}
-                  </Tooltip>
+                  </AddToCartBtn>
+                ) : (
+                  <Flex>
+                    <CartDec
+                      onClick={() =>
+                        handleUpdate(product?.id, Number(countValue) - 1)
+                      }
+                    >
+                      <i className="fa-solid fa-minus"></i>
+                    </CartDec>
+                    <Tooltip
+                      hasArrow
+                      label={`Max Qty 5`}
+                      bg="#666"
+                      opacity={"0.5"}
+                      color="white"
+                      placement="top"
+                      fontWeight={400}
+                      fontSize="12px"
+                    >
+                      {updateCartItem.loading &&
+                      updateCartItem.id === product.id ? (
+                        <Spinner speed="0.65s" size="xs" />
+                      ) : (
+                        <CardCount>{countValue}</CardCount>
+                      )}
+                    </Tooltip>
 
-                  <CartInc
-                    disabled={countValue >= 5}
-                    onClick={() => {
-                      handleUpdate(product?.id, Number(countValue) + 1);
-                    }}
-                  >
-                    <i className="fa-solid fa-plus"></i>
-                  </CartInc>
-                </Flex>
-              )}
-            </Stack>
+                    <CartInc
+                      disabled={countValue >= 5}
+                      onClick={() => {
+                        handleUpdate(product?.id, Number(countValue) + 1);
+                      }}
+                    >
+                      <i className="fa-solid fa-plus"></i>
+                    </CartInc>
+                  </Flex>
+                )}
+              </Stack>
+            )}
           </Flex>
         </Box>
       </Box>

@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import DownloadApp from "../components/DownloadApp";
 import ImageSlider from "../components/ImageSlider";
 import ProductsSlider from "../components/SlidingComponent/ProductsSlider";
@@ -35,18 +36,13 @@ const Home = () => {
   const dispatch = useDispatch();
   const {
     mangoes,
-    combosFruits,
-    exoticFruits,
+
     freshFruits,
-    dailyVegetables,
-    exoticVegetables,
-    cutsPeeled,
-    combosVegetables,
-    herbsLeafs,
-    dryFruits,
+    dailyVeggies,
+    premiumQualityDryFruits,
     bestDeals,
   } = useSelector((state) => state.products);
-  // console.log(dryFruits.data);
+  // console.log(premiumQualityDryFruits.data);
 
   useEffect(() => {
     if (mangoes?.data?.length === 0) {
@@ -56,17 +52,20 @@ const Home = () => {
       dispatch(getFreshFruitsAPI());
     }
 
-    if (dailyVegetables?.data?.length === 0) {
+    if (dailyVeggies?.data?.length === 0) {
       dispatch(getDailyVegetablesAPI());
     }
 
-    if (dryFruits?.data?.length === 0) {
+    if (premiumQualityDryFruits?.data?.length === 0) {
       dispatch(getDryFruitsAPI());
     }
     if (bestDeals?.data?.length === 0) {
       dispatch(getBestDealsAPI());
     }
   }, [dispatch]);
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <Box>
       <Box p={"0 40px"}>
@@ -110,16 +109,24 @@ const Home = () => {
         <Box mt={"50px"}>
           <Flex gap={10}>
             <Stack>
-              <Image src="https://images.fraazo.com/fraazo-prod/web/298.png" />
+              <Link to={`/products/mangoes/mangoes`}>
+                <Image src="https://images.fraazo.com/fraazo-prod/web/298.png" />
+              </Link>
             </Stack>
             <Stack>
-              <Image src="https://images.fraazo.com/fraazo-master/webban/Fruits.png" />
+              <Link to={`products/fruits/fresh-fruits`}>
+                <Image src="https://images.fraazo.com/fraazo-master/webban/Fruits.png" />
+              </Link>
             </Stack>
             <Stack>
-              <Image src="https://images.fraazo.com/fraazo-master/webban/Vegetables.png" />
+              <Link to={`products/vegetables/daily-veggies`}>
+                <Image src="https://images.fraazo.com/fraazo-master/webban/Vegetables.png" />
+              </Link>
             </Stack>
             <Stack>
-              <Image src="https://images.fraazo.com/fraazo-prod/web/201.png" />
+              <Link to={`products/dryfruits/premium-quality-dry-fruits`}>
+                <Image src="https://images.fraazo.com/fraazo-prod/web/201.png" />
+              </Link>
             </Stack>
           </Flex>
         </Box>
@@ -142,14 +149,14 @@ const Home = () => {
             VEGETABLES
           </Text>
           <Divider color={"#ccc"} />
-          <ProductsSlider data={dailyVegetables?.data} />
+          <ProductsSlider data={dailyVeggies?.data} />
         </Box>
         <Box mt={"50px"}>
           <Text fontSize={"3xl"} textAlign={"left"} fontWeight={300}>
             DRY FRUITS
           </Text>
           <Divider color={"#ccc"} />
-          <ProductsSlider data={dryFruits?.data} />
+          <ProductsSlider data={premiumQualityDryFruits?.data} />
         </Box>
 
         <Box mt={10}></Box>
