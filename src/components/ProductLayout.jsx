@@ -107,7 +107,6 @@ const ProductLayout = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    window.scroll(0, 0);
     dispatch(getSingleProductAPI(id));
     dispatch(getBestDealsAPI());
   }, [getSingleProductAPI, dispatch, id]);
@@ -303,10 +302,10 @@ const ProductLayout = () => {
           </div>
         </div>
       </div>
-      <Text fontSize="4xl" opacity="0.7" align="left" ml="75px">
+      <Text fontSize="4xl" opacity="0.7" align="left" ml="5px">
         BEST DEALS
       </Text>
-      <Divider orientation="horizontal" borderColor="gray" w="88%" m="auto" />
+      <Divider orientation="horizontal" borderColor="gray" w="99%" m="auto" />
       {data ? <ProductsSlider data={data} /> : <></>}
     </>
   );
