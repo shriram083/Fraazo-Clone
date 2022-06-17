@@ -2321,42 +2321,8 @@
       "info": ""
     }
   ],
-  "cartItems": [
-    {
-      "productId": 134,
-      "count": 1,
-      "imgUrl": "https://images.fraazo.com/fraazo-master/BONI11.png/tr:w-256,h-256,f-webp",
-      "name": "Onion",
-      "packSize": "1 kg",
-      "price": 11,
-      "strikePrice": 24,
-      "soldOut": "",
-      "notifyme": "",
-      "category": "bestDeals",
-      "subCatagory": "bestDeals",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 1
-    },
-    {
-      "productId": 133,
-      "count": 1,
-      "imgUrl": "https://images.fraazo.com/fraazo-master/VCHI22.png/tr:w-256,h-256,f-webp",
-      "name": "Chillies Green",
-      "packSize": "100 g",
-      "price": 9,
-      "strikePrice": 13,
-      "soldOut": "",
-      "notifyme": "",
-      "category": "bestDeals",
-      "subCatagory": "bestDeals",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 2
-    }
-  ]
+
+  "cartItems": []
+
 }
+

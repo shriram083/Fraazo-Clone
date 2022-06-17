@@ -16,8 +16,9 @@ import Checkout from "./pages/Checkout";
 import Login from "./pages/Login";
 import Footer from "./components/Footer";
 import { getCartItemAPI } from "./store/cart/cart.actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import RequiredAuth from "./hoc/RequiredAuth";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ function App() {
   }, []);
   return (
     <Container className="App" maxW={"none"}>
-      <Navbar />
+      <nav>
+        <Navbar />
+      </nav>
 
       <Container
         style={{ padding: "20px 0 0 0", border: "1px solid blue" }}
@@ -72,7 +75,10 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
         </Routes>
       </Container>
-      <Footer />
+
+      <footer>
+        <Footer />
+      </footer>
     </Container>
   );
 }

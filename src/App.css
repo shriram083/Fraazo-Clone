@@ -5,6 +5,7 @@
 }
 
 ::-webkit-scrollbar {
+  display: none;
   width: 12px;
 }
 ::-webkit-scrollbar-track {
