@@ -1,11 +1,10 @@
-import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import React from "react";
-import { TbCurrencyRupee, TbDiscount2 } from "react-icons/tb";
-import { TiLocation } from "react-icons/ti";
-import { GrLocation } from "react-icons/gr";
-import { MdOutlineAddLocationAlt } from "react-icons/md";
+import { TbCurrencyRupee } from "react-icons/tb";
+import { useSelector } from "react-redux";
 
 const CheckoutCart = () => {
+  const { data: cartData, getCartItems } = useSelector((state) => state.cart);
   return (
     <div>
       <Box
@@ -102,10 +101,10 @@ const CheckoutCart = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text>1 x Total Item Price</Text>
+            <Text>{`${cartData.length} X Total Item Price`}</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>24</Text>
+              <Text>{`${getCartItems.totalPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -115,9 +114,15 @@ const CheckoutCart = () => {
             justifyContent="space-between"
           >
             <Text>Price Savings</Text>
-            <Box display="flex" flexDirection="row" alignItems="center">
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              fontWeight="500"
+              color="#43c6ac"
+            >
               -<TbCurrencyRupee />
-              <Text>8</Text>
+              <Text>30</Text>
             </Box>
           </Box>
           <hr />
@@ -130,7 +135,7 @@ const CheckoutCart = () => {
             <Text>Cart Amount</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>16</Text>
+              <Text>{`${getCartItems.totalPrice - 30}`}</Text>
             </Box>
           </Box>
           <Box
@@ -152,10 +157,18 @@ const CheckoutCart = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text>To Pay (Saved 8 )</Text>
-            <Box display="flex" flexDirection="row" alignItems="center">
+            <Text>
+              To Pay <span style={{ color: "red" }}>(Saved 30 )</span>
+            </Text>
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              color="red"
+              fontSize="20px"
+            >
               <TbCurrencyRupee />
-              <Text>46</Text>
+              <Text>{`${getCartItems.totalPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -173,7 +186,7 @@ const CheckoutCart = () => {
               <Text>Total</Text>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <TbCurrencyRupee />
-                <Text>46</Text>
+                <Text>{`${getCartItems.totalPrice}`}</Text>
               </Box>
             </Box>
             <Heading fontSize="19px" fontWeight="500">
