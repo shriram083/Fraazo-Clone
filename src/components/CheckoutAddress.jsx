@@ -29,6 +29,7 @@ import {
   ChevronLeftIcon,
 } from "@chakra-ui/icons";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 const MyInput = styled.input`
   border: 1px solid gray;
   padding: 15px;
@@ -38,6 +39,7 @@ const MyInput = styled.input`
   border-radius: 5px;
 `;
 const CheckoutCart = () => {
+  const { getCartItems, data: cartData } = useSelector((state) => state.cart);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [drawer, setDrawer] = useState(false);
   const [formData, setFormData] = useState({
@@ -95,7 +97,7 @@ const CheckoutCart = () => {
               Delivering <br /> To :
             </Text>
             <Text fontWeight="500">ABC - 1 2</Text>
-            <Button bg="none" color="#47be9b">
+            <Button bg="none" color="#47be9b" onClick={onOpen}>
               Change
             </Button>
           </Box>
@@ -327,10 +329,10 @@ const CheckoutCart = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text>1 x Total Item Price</Text>
+            <Text>{`${cartData.length} X Total Item Price`}</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>24</Text>
+              <Text>{`${getCartItems.withoutDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -338,11 +340,16 @@ const CheckoutCart = () => {
             flexDirection="row"
             alignItems="center"
             justifyContent="space-between"
+            fontWeight="500"
+            color="#43c6ac"
           >
             <Text>Price Savings</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               -<TbCurrencyRupee />
-              <Text>8</Text>
+              <Text>
+                {getCartItems.withoutDiscountPrice -
+                  getCartItems.withDiscountPrice}
+              </Text>
             </Box>
           </Box>
           <hr />
@@ -355,7 +362,7 @@ const CheckoutCart = () => {
             <Text>Cart Amount</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>16</Text>
+              <Text>{getCartItems.withDiscountPrice}</Text>
             </Box>
           </Box>
           <Box
@@ -377,10 +384,18 @@ const CheckoutCart = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text>To Pay (Saved 8 )</Text>
-            <Box display="flex" flexDirection="row" alignItems="center">
+            <Text>
+              To Pay <span style={{ color: "red" }}>(Saved 30 )</span>
+            </Text>
+            <Box
+              display="flex"
+              flexDirection="row"
+              alignItems="center"
+              color="red"
+              fontSize="20px"
+            >
               <TbCurrencyRupee />
-              <Text>46</Text>
+              <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
             </Box>
           </Box>
           <Box
@@ -398,10 +413,10 @@ const CheckoutCart = () => {
               <Text>Total</Text>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <TbCurrencyRupee />
-                <Text>46</Text>
+                <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
               </Box>
             </Box>
-            <Heading fontSize="19px" fontWeight="500">
+            <Heading fontSize="19px" fontWeight="500" cursor="pointer">
               SELECT DELIVERY SLOT
             </Heading>
           </Box>

@@ -1,9 +1,13 @@
 import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { TbCurrencyRupee, TbDiscount2 } from "react-icons/tb";
 import { ChevronRightIcon } from "@chakra-ui/icons";
+import { useSelector } from "react-redux";
+import CartProduct from "./CartComponents/CartProduct";
 
 const CheckoutCart = () => {
+  const { data: cartData, getCartItems } = useSelector((state) => state.cart);
+
   return (
     <div>
       <Box
@@ -19,34 +23,24 @@ const CheckoutCart = () => {
           padding="20px"
         >
           <Heading fontSize="18px" fontWeight="500" textAlign="left">
-            Cart Items : 1
+            {`Cart Items : ${cartData.length}`}
           </Heading>
           <Box
             display="flex"
-            flexDirection="row"
+            flexDirection="column"
             justifyContent="space-between"
-            alignItems="center"
+            alignItems="left"
+            margin="20px"
           >
-            <Image
-              src="https://images.fraazo.com/fraazo-master/BONI11.png/tr:w-256,h-256"
-              height="200px"
-              width="200px"
-            />
-            <Box>
-              <Text>Onion</Text>
-              <Text>1 kg</Text>
-            </Box>
-            <Box
-              display="flex"
-              gap="20px"
-              flexDirection="row"
-              alignItems="center"
-            >
-              <Button>-</Button>
-              <Text>1</Text>
-              <Button>+</Button>
-            </Box>
-            <Text>Rs.16</Text>
+            {cartData.length === 0 ? (
+              "cart is empty"
+            ) : (
+              <>
+                {cartData?.map((cartItem) => {
+                  return <CartProduct key={cartItem.id} cartItem={cartItem} />;
+                })}
+              </>
+            )}
           </Box>
         </Box>
         <Box
@@ -85,10 +79,10 @@ const CheckoutCart = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text>1 x Total Item Price</Text>
+            <Text>{`${cartData.length} X Total Item Price`}</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>24</Text>
+              <Text>{`${getCartItems.withoutDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -96,11 +90,16 @@ const CheckoutCart = () => {
             flexDirection="row"
             alignItems="center"
             justifyContent="space-between"
+            fontWeight="500"
+            color="#43c6ac"
           >
             <Text>Price Savings</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               -<TbCurrencyRupee />
-              <Text>8</Text>
+              <Text>{`${
+                getCartItems.withoutDiscountPrice -
+                getCartItems.withDiscountPrice
+              }`}</Text>
             </Box>
           </Box>
           <hr />
@@ -113,7 +112,7 @@ const CheckoutCart = () => {
             <Text>Cart Amount</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>16</Text>
+              <Text>{`${getCartItems.withDiscountPrice}`}</Text>
             </Box>
           </Box>
           <Box
@@ -135,10 +134,16 @@ const CheckoutCart = () => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Text>To Pay (Saved 8 )</Text>
+            <Text>
+              To Pay <span style={{ color: "red" }}>(Saved 30 )</span>
+            </Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>46</Text>
+              <Text
+                style={{ color: "red" }}
+                fontSize="20px"
+                fontWeight="500"
+              >{`${getCartItems.withDiscountPrice + 30}`}</Text>
             </Box>
           </Box>
           <Box
@@ -156,10 +161,12 @@ const CheckoutCart = () => {
               <Text>Total</Text>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <TbCurrencyRupee />
-                <Text>46</Text>
+                <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
               </Box>
             </Box>
-            <Heading fontSize="18px">SELECT ADDRESS</Heading>
+            <Heading fontSize="18px" cursor="pointer">
+              SELECT ADDRESS
+            </Heading>
           </Box>
         </Box>
       </Box>

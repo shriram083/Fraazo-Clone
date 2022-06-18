@@ -12,11 +12,11 @@ import {
   Text,
   Grid,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useParams, Link } from "react-router-dom";
+import { useLocation, useParams, Link, useNavigate } from "react-router-dom";
 import AllProductsLayout from "../components/AllProductsLayout";
 import {
   getCombosFruitsAPI,
@@ -30,184 +30,93 @@ import {
   getHerbsLeafsAPI,
   getMangoesAPI,
 } from "../store/products/products.actions";
-const initialData = [
-  {
-    id: 1,
-    imgUrl:
-      "https://images.fraazo.com/fraazo-prod/products/product_images/000/000/599/original/data/tr:w-256,h-256",
-    name: "Pumpkin Disco",
-    packSize: "250 g",
-    price: 20,
-    strikePrice: "",
-    soldOut: "",
-    notifyme: "",
-    category: "vegetables",
-    subCatagory: "dailyVeggies",
-    tooltipText: "",
-    benefits: "",
-    description: "",
-    info: "",
-  },
-  {
-    id: 2,
-    imgUrl:
-      "https://images.fraazo.com/fraazo-prod/images/images/000/006/624/original/data/tr:w-256,h-256",
-    name: "Lady's Finger (Bhindi / Okra / Bhendi) / Bhinda,Vendaikk...",
-    packSize: "500 g",
-    price: 12,
-    strikePrice: 28,
-    soldOut: "",
-    notifyme: "",
-    category: "vegetables",
-    subCatagory: "dailyVeggies",
-    tooltipText: "",
-    benefits: "",
-    description: "",
-    info: "",
-  },
-  {
-    id: 3,
-    imgUrl: "https://images.fraazo.com/fraazo-master/VBEE12.png/tr:w-256,h-256",
-    name: "Beetroot",
-    packSize: "500 g",
-    price: 30,
-    strikePrice: "",
-    soldOut: "",
-    notifyme: "",
-    category: "vegetables",
-    subCatagory: "dailyVeggies",
-    tooltipText: "",
-    benefits: "",
-    description: "",
-    info: "",
-  },
-  {
-    id: 4,
-    imgUrl: "https://images.fraazo.com/fraazo-master/VSUR12.png/tr:w-256,h-256",
-    name: "Yam (Suran / Elephant Foot)",
-    packSize: "500 g",
-    price: 43,
-    strikePrice: "",
-    soldOut: "",
-    notifyme: "",
-    category: "vegetables",
-    subCatagory: "dailyVeggies",
-    tooltipText: "",
-    benefits: "",
-    description: "",
-    info: "",
-  },
-  {
-    id: 5,
-    imgUrl: "https://images.fraazo.com/fraazo-master/BONI11.png/tr:w-256,h-256",
-    name: "Onion",
-    packSize: "1 kg",
-    price: 11,
-    strikePrice: 24,
-    soldOut: "",
-    notifyme: "",
-    category: "vegetables",
-    subCatagory: "dailyVeggies",
-    tooltipText: "",
-    benefits: "",
-    description: "",
-    info: "",
-  },
-];
-const Products = () => {
-  const [porductsData, setProductsData] = useState(initialData);
-  const [selected, setSelected] = useState("");
-  const dispatch = useDispatch();
-  const location = useLocation();
 
+const Products = () => {
+  const [porductsData, setProductsData] = useState([]);
+  const [selected, setSelected] = useState("");
+  const [linkTag, setLinkTag] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const preTag = useRef("");
   const { subcategory } = useParams();
-  console.log("path:", subcategory);
-  // console.log(location);
+  // console.log("path:", subcategory);
 
   const {
     mangoes,
-    combosFruits,
+    fruitCombos,
     exoticFruits,
     freshFruits,
-    dailyVegetables,
+    dailyVeggies,
     exoticVegetables,
-    cutsPeeled,
-    combosVegetables,
-    herbsLeafs,
-    dryFruits,
+    cutsPeeledSprouts,
+    vegetableCombos,
+    herbsLeafies,
+    premiumQualityDryFruits,
   } = useSelector((state) => state.products);
-  // console.log(dryFruits.data);
-  const handlegetMangoes = (value) => {
-    if (mangoes?.data?.length === 0) {
-      dispatch(getMangoesAPI());
+  // console.log(premiumQualityDryFruits.data);
+
+  const findSubcategoryFromPath = (subcategory) => {
+    if (subcategory == undefined || subcategory == null) {
+      setProductsData(mangoes.data);
+      return true;
     }
-    setSelected(value ? value : "Mangoes");
-    setProductsData(mangoes?.data);
-  };
-  const handlegetFreshFruits = (value) => {
-    if (freshFruits?.data?.length === 0) {
-      dispatch(getFreshFruitsAPI());
+    // console.log("after loading:", subcategory);
+    let ans = subcategory.split("-");
+    let AnsCategory = "";
+    for (let i = 0; i < ans.length; i++) {
+      for (let j = 0; j < ans[i].length; j++) {
+        // console.log(ans[i][j]);
+        if (i == 0) {
+          AnsCategory += ans[i][j];
+        } else {
+          if (j == 0) {
+            AnsCategory += ans[i][j].toUpperCase();
+          } else {
+            AnsCategory += ans[i][j];
+          }
+        }
+      }
     }
-    setSelected(value);
-    setProductsData(freshFruits?.data);
-  };
-  const handlegetExoticFruits = (value) => {
-    if (exoticFruits?.data?.length === 0) {
-      dispatch(getExoticFruitsAPI());
+
+    // console.log(typeof AnsCategory);
+    // return AnsCategory;
+
+    switch (AnsCategory) {
+      case "mangoes":
+        return setProductsData(mangoes.data);
+
+      case "freshFruits":
+        return setProductsData(freshFruits.data);
+      case "exoticFruits":
+        return setProductsData(exoticFruits.data);
+      case "fruitCombos":
+        return setProductsData(fruitCombos.data);
+      case "dailyVeggies":
+        return setProductsData(dailyVeggies.data);
+      case "exoticVegetables":
+        return setProductsData(exoticVegetables.data);
+      case "cutsPeeledSprouts":
+        return setProductsData(cutsPeeledSprouts.data);
+      case "vegetableCombos":
+        return setProductsData(vegetableCombos.data);
+      case "herbsLeafies":
+        return setProductsData(herbsLeafies.data);
+      case "premiumQualityDryFruits":
+        return setProductsData(premiumQualityDryFruits.data);
+
+      default:
+        // console.log(typeof AnsCategory);
+        return setProductsData(mangoes.data);
     }
-    setSelected(value);
-    setProductsData(exoticFruits?.data);
   };
-  const handlegetCombosFruits = (value) => {
-    if (combosFruits?.data?.length === 0) {
-      dispatch(getCombosFruitsAPI());
-    }
-    setSelected(value);
-    setProductsData(combosFruits?.data);
+
+  window.onload = (event) => {
+    // console.log("page is fully loaded");
+    // console.log("page is fully loaded", subcategory);
+    findSubcategoryFromPath(subcategory);
   };
-  const handlegetDailyVeggies = (value) => {
-    if (dailyVegetables?.data?.length === 0) {
-      dispatch(getDailyVegetablesAPI());
-    }
-    setSelected(value);
-    setProductsData(dailyVegetables?.data);
-  };
-  const handlegetExoticVegetable = (value) => {
-    if (exoticVegetables?.data?.length === 0) {
-      dispatch(getExoticVegetablesAPI());
-    }
-    setSelected(value);
-    setProductsData(exoticVegetables?.data);
-  };
-  const handlegetCutsPeeled = (value) => {
-    if (cutsPeeled?.data?.length === 0) {
-      dispatch(getCutsPeeledAPI());
-    }
-    setSelected(value);
-    setProductsData(cutsPeeled?.data);
-  };
-  const handlegetVegetableCombos = (value) => {
-    if (combosVegetables?.data?.length === 0) {
-      dispatch(getCombosVegetablesAPI());
-    }
-    setSelected(value);
-    setProductsData(combosVegetables?.data);
-  };
-  const handlegetHerbsLeafies = (value) => {
-    if (herbsLeafs?.data?.length === 0) {
-      dispatch(getHerbsLeafsAPI());
-    }
-    setSelected(value);
-    setProductsData(herbsLeafs?.data);
-  };
-  const handlegetDryFruits = (value) => {
-    if (dryFruits?.data?.length === 0) {
-      dispatch(getDryFruitsAPI());
-    }
-    setSelected(value);
-    setProductsData(dryFruits?.data);
-  };
-  console.log("selected", selected);
+
+
 
   useEffect(() => {
     if (mangoes?.data?.length === 0) {
@@ -219,38 +128,41 @@ const Products = () => {
     if (exoticFruits?.data?.length === 0) {
       dispatch(getExoticFruitsAPI());
     }
-    if (combosFruits?.data?.length === 0) {
+    if (fruitCombos?.data?.length === 0) {
       dispatch(getCombosFruitsAPI());
     }
-    if (combosFruits?.data?.length === 0) {
+    if (fruitCombos?.data?.length === 0) {
       dispatch(getCombosFruitsAPI());
     }
-    if (dailyVegetables?.data?.length === 0) {
+    if (dailyVeggies?.data?.length === 0) {
       dispatch(getDailyVegetablesAPI());
     }
     if (exoticVegetables?.data?.length === 0) {
       dispatch(getExoticVegetablesAPI());
     }
-    if (cutsPeeled?.data?.length === 0) {
+    if (cutsPeeledSprouts?.data?.length === 0) {
       dispatch(getCutsPeeledAPI());
     }
-    if (combosVegetables?.data?.length === 0) {
+    if (vegetableCombos?.data?.length === 0) {
       dispatch(getCombosVegetablesAPI());
     }
-    if (herbsLeafs?.data?.length === 0) {
+    if (herbsLeafies?.data?.length === 0) {
       dispatch(getHerbsLeafsAPI());
     }
-    if (dryFruits?.data?.length === 0) {
+    if (premiumQualityDryFruits?.data?.length === 0) {
       dispatch(getDryFruitsAPI());
     }
+
+    window.scroll(0, 0);
   }, []);
+  useEffect(() => {
+    findSubcategoryFromPath(subcategory);
+  }, [subcategory]);
   const sideMenu = [
     {
       category: "Mangoes",
       path: "mangoes",
-      subCategory: [
-        { subpath: "mangoes", item: "Mangoes", getProduct: handlegetMangoes },
-      ],
+      subCategory: [{ subpath: "mangoes", item: "Mangoes" }],
     },
     {
       category: "Fruits",
@@ -259,17 +171,14 @@ const Products = () => {
         {
           subpath: "fresh-fruits",
           item: "Fresh Fruits",
-          getProduct: handlegetFreshFruits,
         },
         {
-          subpath: "exotic-ruits",
+          subpath: "exotic-fruits",
           item: "Exotic Fruits",
-          getProduct: handlegetExoticFruits,
         },
         {
           subpath: "fruit-combos",
           item: "Fruit Combos",
-          getProduct: handlegetCombosFruits,
         },
       ],
     },
@@ -280,27 +189,22 @@ const Products = () => {
         {
           subpath: "daily-veggies",
           item: "Daily Veggies",
-          getProduct: handlegetDailyVeggies,
         },
         {
           subpath: "exotic-vegetables",
           item: "Exotic Vegetables",
-          getProduct: handlegetExoticVegetable,
         },
         {
           subpath: "cuts-peeled-sprouts",
           item: "Cuts, Peeled & Sprouts",
-          getProduct: handlegetCutsPeeled,
         },
         {
           subpath: "vegetable-combos",
           item: "Vegetable Combos",
-          getProduct: handlegetVegetableCombos,
         },
         {
           subpath: "herbs-leafies",
           item: "Herbs & Leafies",
-          getProduct: handlegetHerbsLeafies,
         },
       ],
     },
@@ -311,7 +215,6 @@ const Products = () => {
         {
           subpath: "premium-quality-dry-fruits",
           item: "Premium Quality Dry Fruits",
-          getProduct: handlegetDryFruits,
         },
       ],
     },
@@ -338,45 +241,64 @@ const Products = () => {
                         ) : (
                           <AddIcon fontSize="12px" color={"#4fbb90"} />
                         )}
-
                         <Box
                           flex="1"
                           textAlign="left"
                           ml={3}
-                          onClick={() =>
-                            item.subCategory[0].getProduct(
-                              item.subCategory[0].item
-                            )
-                          }
+                          fontSize={"16px"}
+                          fontWeight={600}
+                          onClick={() => {
+                            // item.subCategory[0].getProduct(
+                            //   item.subCategory[0].item
+                            // );
+                            setLinkTag(` > ${item.category}`);
+                            setSelected(item.subCategory[0].item);
+                            navigate(
+                              `/products/${item.path}/${item.subCategory[0]?.subpath}`
+                            );
+                            preTag.current = ` > ${item.category}`;
+                          }}
                           cursor="pointer"
                         >
+                          {/* <Link
+                            to={`/products/${item.path}/${item.subCategory[0]?.subpath}`}
+                          > */}
                           {item.category}
+                          {/* </Link> */}
                         </Box>
                       </AccordionButton>
                     </h2>
                     {item.subCategory.map((subItem) => (
-                      <Link to={`/products/${item.path}/${subItem.subpath}`} key={subItem.item}>
-                        <AccordionPanel
-                          key={subItem.item}
-                          pb={4}
-                          fontSize="14px"
-                          textAlign={"left"}
-                          ml={2}
-                          border={"1px solid #eee"}
-                          borderLeft={"none"}
-                          onClick={() => subItem.getProduct(subItem.item)}
-                          cursor="pointer"
+                      // <Link
+                      //   to={`/products/${item.path}/${subItem.subpath}`}
+                      //   key={subItem.item}
+                      // >
+                      <AccordionPanel
+                        key={subItem.item}
+                        pb={4}
+                        fontSize="14px"
+                        textAlign={"left"}
+                        ml={2}
+                        border={"1px solid #eee"}
+                        borderLeft={"none"}
+                        onClick={() => {
+                          // subItem.getProduct(subItem.item);
+                          setLinkTag(` > ${item.category}`);
+                          setSelected(subItem.item);
+                          navigate(`/products/${item.path}/${subItem.subpath}`);
+                        }}
+                        cursor="pointer"
+                      >
+                        <Flex
+                          alignItems={"center"}
+                          justifyContent="left"
+                          gap={3}
                         >
-                          <Flex
-                            alignItems={"center"}
-                            justifyContent="left"
-                            gap={3}
-                          >
-                            <i className="fa-solid fa-angle-right"></i>{" "}
-                            <Text>{subItem.item}</Text>
-                          </Flex>
-                        </AccordionPanel>
-                      </Link>
+                          <i className="fa-solid fa-angle-right"></i>{" "}
+                          <Text>{subItem.item}</Text>
+                        </Flex>
+                      </AccordionPanel>
+                      // </Link>
                     ))}
                   </>
                 )}
@@ -385,6 +307,21 @@ const Products = () => {
           </Accordion>
         </Box>
         <Box width={"100%"} pl="10px">
+          <Flex
+            textAlign={"left"}
+            fontWeight={500}
+            fontSize="15px"
+            pb={"10px"}
+            color={"black"}
+            gap={2}
+          >
+            <Link to="/">
+              <Text opacity={"0.6"} _hover={{ textDecoration: "underline" }}>
+                Home
+              </Text>
+            </Link>
+            {linkTag}
+          </Flex>
           <Text
             textAlign={"left"}
             fontWeight={600}
@@ -411,165 +348,3 @@ const Products = () => {
 };
 
 export default Products;
-
-{
-  /* <AccordionItem>
-              {({ isExpanded }) => (
-                <>
-                  <h2>
-                    <AccordionButton>
-                      {isExpanded ? (
-                        <MinusIcon fontSize="12px" />
-                      ) : (
-                        <AddIcon fontSize="12px" />
-                      )}
-
-                      <Box flex="1" textAlign="left" ml={3}>
-                        Fruits
-                      </Box>
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                    onClick={handlegetFreshFruits}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Fresh Fruits</Text>
-                    </Flex>
-                  </AccordionPanel>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                    onClick={handlegetExoticFruits}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Exotic Fruits</Text>
-                    </Flex>
-                  </AccordionPanel>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                    onClick={handlegetCombosFruits}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Fruit Combos</Text>
-                    </Flex>
-                  </AccordionPanel>
-                </>
-              )}
-            </AccordionItem>
-            <AccordionItem>
-              {({ isExpanded }) => (
-                <>
-                  <h2>
-                    <AccordionButton>
-                      {isExpanded ? (
-                        <MinusIcon fontSize="12px" />
-                      ) : (
-                        <AddIcon fontSize="12px" />
-                      )}
-
-                      <Box flex="1" textAlign="left" ml={3}>
-                        Vegetables
-                      </Box>
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Daily Veggies</Text>
-                    </Flex>
-                  </AccordionPanel>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Exotic Vegetables</Text>
-                    </Flex>
-                  </AccordionPanel>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>{"Cuts, Peeled & Sprouts"}</Text>
-                    </Flex>
-                  </AccordionPanel>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Vegetable Combos</Text>
-                    </Flex>
-                  </AccordionPanel>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>{"Herbs & Leafies"}</Text>
-                    </Flex>
-                  </AccordionPanel>
-                </>
-              )}
-            </AccordionItem>
-            <AccordionItem>
-              {({ isExpanded }) => (
-                <>
-                  <h2>
-                    <AccordionButton>
-                      {isExpanded ? (
-                        <MinusIcon fontSize="12px" />
-                      ) : (
-                        <AddIcon fontSize="12px" />
-                      )}
-
-                      <Box flex="1" textAlign="left" ml={3}>
-                        Dry Fruits
-                      </Box>
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel
-                    pb={4}
-                    fontSize="14px"
-                    textAlign={"left"}
-                    ml={2}
-                  >
-                    <Flex alignItems={"center"} justifyContent="left" gap={3}>
-                      <i className="fa-solid fa-angle-right"></i>{" "}
-                      <Text>Premium Quality Dry Fruits</Text>
-                    </Flex>
-                  </AccordionPanel>
-                </>
-              )}
-            </AccordionItem> */
-}

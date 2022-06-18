@@ -2,7 +2,7 @@ import { Container } from "@chakra-ui/react";
 
 import "./App.css";
 import Navbar from "./components/Navbar";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams, useLocation } from "react-router-dom";
 import ProductDetails from "./pages/ProductDetails";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
@@ -13,22 +13,32 @@ import MyCredits from "./pages/MyCredits";
 import Invite from "./pages/Invite";
 import Support from "./pages/Support";
 import Checkout from "./pages/Checkout";
-
 import Login from "./pages/Login";
-
 import Footer from "./components/Footer";
-
+import { getCartItemAPI } from "./store/cart/cart.actions";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import RequiredAuth from "./hoc/RequiredAuth";
+import OtpPage from "./components/OrderStatus/OtpPage";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCartItemAPI());
+  }, []);
   return (
     <Container className="App" maxW={"none"}>
-      <Navbar />
-
+      <nav>
+        <Navbar />
+      </nav>
+      {/* <OtpPage/> */}
       <Container
-        style={{ padding: "20px 0 0 0", border: "1px solid blue" }}
+        style={{ padding: "20px 0 0 0" }}
         maxW="container.xl"
         mt={"88px"}
         boxSizing="border-box"
+        // display={"none"}
       >
         <Routes>
           <Route path="*" element={<ErrorPage />} />
@@ -41,22 +51,13 @@ function App() {
             <Route path="invite" element={<Invite />} />
             <Route path="support" element={<Support />} />
           </Route>
-          <Route
-            path="/products/mangoes/:subcategory"
-            element={<Products />}
-          />
+          <Route path="/products/mangoes/:subcategory" element={<Products />} />
           <Route
             path="/products/vegetables/:subcategory"
             element={<Products />}
           />
-          <Route
-            path="/products/fruits/:subcategory"
-            element={<Products />}
-          />
-          <Route
-            path="/products/herbs/:subcategory"
-            element={<Products />}
-          />
+          <Route path="/products/fruits/:subcategory" element={<Products />} />
+          <Route path="/products/herbs/:subcategory" element={<Products />} />
           <Route
             path="/products/dryfruits/:subcategory"
             element={<Products />}
@@ -70,15 +71,16 @@ function App() {
             element={<Products />}
           />
 
-
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
 
           <Route path="/checkout" element={<Checkout />} />
-
         </Routes>
       </Container>
-      <Footer />
+
+      <footer>
+        <Footer />
+      </footer>
     </Container>
   );
 }

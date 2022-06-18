@@ -168,7 +168,6 @@ const CartProduct = ({ cartItem }) => {
     dispatch(removeItemFromCartAPI(id));
   };
 
-
   useEffect(() => {
     dispatch(getCartItemAPI());
   }, [dispatch]);
@@ -239,10 +238,14 @@ const CartProduct = ({ cartItem }) => {
           </Box>
           <Flex justifyContent={"space-between"}>
             <Flex gap={2} fontSize="16px" m="0 !important" fontWeight={500}>
-              <Text color={"black"}>₹{cartItem?.price}</Text>
-              <Text as="s" color={"#828282"}>
+              {cartItem?.strikePrice ? (
+                <Text color={"black"}>₹{cartItem?.strikePrice}</Text>
+              ) : (
+                <Text color={"black"}>₹{cartItem?.price}</Text>
+              )}
+              {/* <Text as="s" color={"#828282"}>
                 {cartItem?.strikePrice ? `₹${cartItem?.strikePrice}` : ""}
-              </Text>
+              </Text> */}
             </Flex>
             <Stack>
               {!!cartItem?.soldOut ? (
@@ -288,8 +291,6 @@ const CartProduct = ({ cartItem }) => {
           </Flex>
         </Box>
       </Flex>
-
-      
     </Box>
   );
 };
