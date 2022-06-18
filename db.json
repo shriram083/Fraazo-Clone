@@ -2321,5 +2321,42 @@
       "info": ""
     }
   ],
-  "cartItems": []
+  "cartItems": [
+    {
+      "productId": 129,
+      "count": 1,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/VMAN12.png/tr:w-256,h-256",
+      "name": "Mango Raw",
+      "packSize": "250 g",
+      "price": 17,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "mangoes",
+      "subCatagory": "mangoes",
+      "tooltipText": "",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 4
+    },
+    {
+      "productId": 130,
+      "count": 1,
+      "imgUrl": "https://images.fraazo.com/fraazo-master/FKES1.png/tr:w-256,h-256",
+      "name": "Mango Kesar",
+      "packSize": "1 kg",
+      "price": 135,
+      "strikePrice": "",
+      "soldOut": "",
+      "notifyme": "",
+      "category": "mangoes",
+      "subCatagory": "mangoes",
+      "tooltipText": "",
+      "benefits": "",
+      "description": "",
+      "info": "",
+      "id": 5
+    }
+  ]
 }

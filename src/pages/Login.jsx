@@ -13,6 +13,7 @@ import {
   RadioGroup,
   Radio,
   FormLabel,
+  useToast,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,6 +49,7 @@ const InputBarOTP = styled.input`
 const Login = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const toast = useToast();
 
   const initialRef = useRef(null);
   const OTP = useRef(null);
@@ -84,12 +86,22 @@ const Login = () => {
         dispatch({ type: GET_LOGIN });
         OTP.current.value = "";
         setValid(false);
-      }
-      else {
+      } else {
         OTP.current.value = "";
         setValid(false);
         console.log("false:");
       }
+    }else{
+      console.log("wrong otp");
+      toast({
+        title: `Please Enter Correct OTP`,
+        description:"",
+        status: "warning",
+        position: "top",
+        duration: 2000,
+        isClosable: true,
+      });
+      // toast.closeAll();
     }
   };
 
@@ -126,7 +138,6 @@ const Login = () => {
     }
     onOpen();
   }, []);
-  
 
   return (
     <Box>

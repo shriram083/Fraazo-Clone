@@ -13,7 +13,7 @@ const ErrorPage = () => {
       py={10}
       px={6}
       height="100vh"
-      border="1px solid red"
+      // border="1px solid red"
       display="flex"
       justifyContent="center"
       alignItems="center"
