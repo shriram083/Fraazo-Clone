@@ -7,8 +7,10 @@ import {
   Text,
   Stack,
   Divider,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DownloadApp from "../components/DownloadApp";
@@ -31,19 +33,20 @@ const sliderImg = [
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3768.png", id: 3768 },
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3770.png", id: 3770 },
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3671.png", id: 3771 },
+  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3945.png", id: 3945 },
 ];
 const Home = () => {
   const dispatch = useDispatch();
+  
   const {
     mangoes,
-
     freshFruits,
     dailyVeggies,
     premiumQualityDryFruits,
     bestDeals,
   } = useSelector((state) => state.products);
   // console.log(premiumQualityDryFruits.data);
-
+  
   useEffect(() => {
     if (mangoes?.data?.length === 0) {
       dispatch(getMangoesAPI());
@@ -65,10 +68,11 @@ const Home = () => {
   }, [dispatch]);
   useEffect(() => {
     window.scroll(0, 0);
+   
   }, []);
   return (
     <Box>
-      <Box p={"0 40px"}>
+      <Box p={"0 60px"}>
         <Flex gap={7}>
           <Box w="65%" color="white">
             <ImageSlider key={sliderImg.id} slides={sliderImg} />

@@ -23,6 +23,7 @@ import {
   Stack,
   Spinner,
   Divider,
+  Skeleton,
 } from "@chakra-ui/react";
 import {
   addItemToCartAPI,
@@ -102,14 +103,18 @@ const ProductLayout = () => {
   const dispatch = useDispatch();
   const [countValue, setCountValue] = useState(0);
   const { data: cartData, addCartItem } = useSelector((state) => state.cart);
-  const { singleProduct } = useSelector((state) => state.products);
+  const { data: singleProduct, loading: singleProductLoading } = useSelector(
+    (state) => state.products.singleProduct
+  );
   const { data } = useSelector((state) => state.products.bestDeals);
   const { id } = useParams();
 
   useEffect(() => {
-    window.scroll(0,0);
+    window.scroll(0, 0);
     dispatch(getSingleProductAPI(id));
-    dispatch(getBestDealsAPI());
+    if (data?.length == 0) {
+      dispatch(getBestDealsAPI());
+    }
   }, [getSingleProductAPI, dispatch, id]);
 
   const handleAddToCart = (item) => {
@@ -174,6 +179,7 @@ const ProductLayout = () => {
             className={style.productImage}
           />
         </div>
+
         <div className={style.details}>
           <div className="data">
             <h1 className={style.productname}>{singleProduct.name}</h1>
@@ -216,57 +222,69 @@ const ProductLayout = () => {
               </div>
             </Button>
           </Flex> */}
-            <Stack>
-              {countValue == 0 ? (
-                <AddToCartBtn
-                  key={singleProduct.id}
-                  onClick={() => handleAddToCart(singleProduct)}
-                >
-                  {addCartItem.loading ? (
-                    <Spinner size="xs" />
-                  ) : (
-                    <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
-                  )}
-                  ADD
-                </AddToCartBtn>
-              ) : (
-                <Flex ml={"20px"}>
-                  <CartDec
-                    onClick={() =>
-                      handleUpdate(singleProduct?.id, Number(countValue) - 1)
-                    }
+            {!!singleProduct?.soldOut ? (
+              <Text
+                ml={"20px"}
+                textAlign={"left"}
+                fontWeight={"500"}
+                fontSize={"18px"}
+                color={"red.300"}
+              >
+                {singleProduct?.soldOut}
+              </Text>
+            ) : (
+              <Stack>
+                {countValue == 0 ? (
+                  <AddToCartBtn
+                    key={singleProduct.id}
+                    onClick={() => handleAddToCart(singleProduct)}
                   >
-                    <i className="fa-solid fa-minus"></i>
-                  </CartDec>
-                  <Tooltip
-                    hasArrow
-                    label={`Max Qty 5`}
-                    bg="#666"
-                    opacity={"0.5"}
-                    color="white"
-                    placement="top"
-                    fontWeight={400}
-                    fontSize="12px"
-                  >
-                    <CardCount>{countValue}</CardCount>
-                  </Tooltip>
+                    {addCartItem.loading ? (
+                      <Spinner size="xs" />
+                    ) : (
+                      <CartPlusIcon className="fa-solid fa-cart-plus"></CartPlusIcon>
+                    )}
+                    ADD
+                  </AddToCartBtn>
+                ) : (
+                  <Flex ml={"20px"}>
+                    <CartDec
+                      onClick={() =>
+                        handleUpdate(singleProduct?.id, Number(countValue) - 1)
+                      }
+                    >
+                      <i className="fa-solid fa-minus"></i>
+                    </CartDec>
+                    <Tooltip
+                      hasArrow
+                      label={`Max Qty 5`}
+                      bg="#666"
+                      opacity={"0.5"}
+                      color="white"
+                      placement="top"
+                      fontWeight={400}
+                      fontSize="12px"
+                    >
+                      <CardCount>{countValue}</CardCount>
+                    </Tooltip>
 
-                  <CartInc
-                    disabled={countValue >= 5}
-                    onClick={() => {
-                      handleUpdate(singleProduct?.id, Number(countValue) + 1);
-                    }}
-                  >
-                    <i className="fa-solid fa-plus"></i>
-                  </CartInc>
-                </Flex>
-              )}
-            </Stack>
+                    <CartInc
+                      disabled={countValue >= 5}
+                      onClick={() => {
+                        handleUpdate(singleProduct?.id, Number(countValue) + 1);
+                      }}
+                    >
+                      <i className="fa-solid fa-plus"></i>
+                    </CartInc>
+                  </Flex>
+                )}
+              </Stack>
+            )}
           </div>
           <div className={style.tabs}>
             <hr className={style.hr}></hr>
             <Tabs>
-              <TabList>
+              <TabList borderBottom={"none"}>
                 <Tab>Description</Tab>
                 <Tab>Benifits</Tab>
                 <Tab>Info</Tab>
@@ -281,21 +299,21 @@ const ProductLayout = () => {
                   <p>
                     {singleProduct.description.length !== 0
                       ? singleProduct.description
-                      : "no details available"}
+                      : singleProduct.name}
                   </p>
                 </TabPanel>
                 <TabPanel>
                   <p>
                     {singleProduct.benefits.length !== 0
                       ? singleProduct.benefits
-                      : "no details available"}
+                      : "No details available"}
                   </p>
                 </TabPanel>
                 <TabPanel>
                   <p>
                     {singleProduct.info.length
                       ? singleProduct.info
-                      : "no details available"}
+                      : "No details available"}
                   </p>
                 </TabPanel>
               </TabPanels>
@@ -303,11 +321,13 @@ const ProductLayout = () => {
           </div>
         </div>
       </div>
-      <Text fontSize="4xl" opacity="0.7" align="left" ml="5px">
-        BEST DEALS
-      </Text>
-      <Divider orientation="horizontal" borderColor="gray" w="99%" m="auto" />
-      {data ? <ProductsSlider data={data} /> : <></>}
+      <Box p={"0 40px"}>
+        <Text fontSize="4xl" opacity="0.7" align="left" ml="5px">
+          BEST DEALS
+        </Text>
+        <Divider orientation="horizontal" borderColor="gray" w="99%" m="auto" />
+        {data ? <ProductsSlider data={data} /> : <></>}
+      </Box>
     </>
   );
 };

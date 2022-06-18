@@ -15,10 +15,90 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import React from "react";
+import { CgFormatSlash } from "react-icons/cg";
+import React, { useState } from "react";
 import { BillDetails } from "./BillDetails";
+let initState = {
+  cardNumber: "",
+  expiryMonth: "",
+  expiryYear: "",
+  cardName: "",
+  cvv: "",
+};
+//////// SETTING LOCAL STORAGE
+localStorage.setItem(
+  "savedPaymentDetails",
+  JSON.stringify({
+    cardNumber: "1234567891234567",
+    expiryMonth: "01",
+    expiryYear: "22",
+    cardName: "fraazo",
+    cvv: "123",
+  })
+);
 
+///////////
 const Payment = () => {
+  const [cardPaymentDetails, setCardPaymentDetails] = useState(initState);
+
+  //////// HANDLING ON CHANGE
+
+  const handleOnChange = (e) => {
+    let { name, value } = e.target;
+    //  console.log("card", name, value, name.length);
+
+    if (name === "cvv") {
+      if (value.length > 3) {
+        return;
+      } else {
+        setCardPaymentDetails({
+          ...cardPaymentDetails,
+          [name]: value,
+        });
+      }
+    } else if (name === "expiryMonth" || name === "expiryYear") {
+      if (value.length > 2) {
+        return;
+      } else {
+        setCardPaymentDetails({
+          ...cardPaymentDetails,
+          [name]: value,
+        });
+      }
+    } else if (name === "cardNumber") {
+      if (value.length > 16) {
+        return;
+      } else {
+        setCardPaymentDetails({
+          ...cardPaymentDetails,
+          [name]: value,
+        });
+      }
+    } else {
+      setCardPaymentDetails({
+        ...cardPaymentDetails,
+        [name]: value,
+      });
+    }
+    ////   console.log(cardPaymentDetails);
+  };
+
+  //////// HANDLING ON SUBMIT
+
+  const handleSubmitPayment = () => {
+    let savedPaymentDetails = JSON.parse(
+      localStorage.getItem("savedPaymentDetails")
+    );
+    if (
+      savedPaymentDetails.cardNumber === cardPaymentDetails.cardNumber &&
+      savedPaymentDetails.cvv === cardPaymentDetails.cvv
+    ) {
+      console.log("CARD PAYMENT SUCCESS");
+    } else {
+      console.log("CARD PAYMENT FAILURE");
+    }
+  };
+  ///////////////
   return (
     <div style={{ display: "flex" }}>
       <div
@@ -158,6 +238,10 @@ const Payment = () => {
                     variant="flushed"
                     width="50%"
                     focusBorderColor="green.200"
+                    onChange={(e) => handleOnChange(e)}
+                    value={cardPaymentDetails.cardNumber}
+                    name="cardNumber"
+                    placeholder="Card Number"
                   />
                 </Stack>
               </div>
@@ -179,13 +263,35 @@ const Payment = () => {
                   >
                     Expiry (MM/YY)
                   </p>
-                  <Stack spacing={3}>
+                  <div
+                    spacing={3}
+                    style={{
+                      marginLeft: "0",
+                      display: "flex",
+                      width: "70%",
+                      justifyContent: "space-between",
+                    }}
+                  >
                     <Input
                       variant="flushed"
-                      width="100%"
+                      width="40%"
                       focusBorderColor="green.200"
+                      onChange={(e) => handleOnChange(e)}
+                      name="expiryMonth"
+                      placeholder="MM"
+                      value={cardPaymentDetails.expiryMonth}
                     />
-                  </Stack>
+
+                    <Input
+                      placeholder="YY"
+                      variant="flushed"
+                      width="40%"
+                      focusBorderColor="green.200"
+                      onChange={(e) => handleOnChange(e)}
+                      name="expiryYear"
+                      value={cardPaymentDetails.expiryYear}
+                    />
+                  </div>
                 </div>
                 <div>
                   <p
@@ -203,6 +309,10 @@ const Payment = () => {
                       variant="flushed"
                       width="100%"
                       focusBorderColor="green.200"
+                      onChange={(e) => handleOnChange(e)}
+                      name="cvv"
+                      placeholder="XXX"
+                      value={cardPaymentDetails.cvv}
                     />
                   </Stack>
                 </div>
@@ -223,6 +333,9 @@ const Payment = () => {
                     variant="flushed"
                     width="50%"
                     focusBorderColor="green.200"
+                    onChange={(e) => handleOnChange(e)}
+                    name="cardName"
+                    value={cardPaymentDetails.cardName}
                   />
                 </Stack>
               </div>
@@ -245,6 +358,7 @@ const Payment = () => {
                 width="50%"
                 borderRadius="10px"
                 display="flex"
+                onClick={() => handleSubmitPayment()}
               >
                 PAY NOW
               </Button>

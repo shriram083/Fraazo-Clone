@@ -2322,41 +2322,6 @@
     }
   ],
   "cartItems": [
-    {
-      "productId": 127,
-      "count": 1,
-      "imgUrl": "https://images.fraazo.com/fraazo-prod/images/images/000/004/597/original/data/tr:w-256,h-256",
-      "name": "Mango Totapuri Raw",
-      "packSize": "1 Kg",
-      "price": 81,
-      "strikePrice": "",
-      "soldOut": "",
-      "notifyme": "",
-      "category": "mangoes",
-      "subCatagory": "mangoes",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 1
-    },
-    {
-      "productId": 129,
-      "count": 1,
-      "imgUrl": "https://images.fraazo.com/fraazo-master/VMAN12.png/tr:w-256,h-256",
-      "name": "Mango Raw",
-      "packSize": "250 g",
-      "price": 17,
-      "strikePrice": "",
-      "soldOut": "",
-      "notifyme": "",
-      "category": "mangoes",
-      "subCatagory": "mangoes",
-      "tooltipText": "",
-      "benefits": "",
-      "description": "",
-      "info": "",
-      "id": 2
-    }
+    
   ]
 }
