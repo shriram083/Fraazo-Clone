@@ -222,7 +222,7 @@ const Payment = () => {
           </TabList>
           <TabPanels>
             <TabPanel width="100%" border="1px solid red">
-              <div marginBottom="25px">
+              <div mb="25px">
                 <p
                   align="left"
                   style={{
@@ -233,7 +233,7 @@ const Payment = () => {
                 >
                   Card number
                 </p>
-                <Stack spacing={3} marginBottom="40px">
+                <Stack spacing={3} mb="40px">
                   <Input
                     variant="flushed"
                     width="50%"
@@ -317,7 +317,7 @@ const Payment = () => {
                   </Stack>
                 </div>
               </div>
-              <div marginBottom="25px">
+              <div mb="25px">
                 <p
                   align="left"
                   style={{
@@ -328,7 +328,7 @@ const Payment = () => {
                 >
                   Card name
                 </p>
-                <Stack spacing={3} marginBottom="40px">
+                <Stack spacing={3} mb="40px">
                   <Input
                     variant="flushed"
                     width="50%"

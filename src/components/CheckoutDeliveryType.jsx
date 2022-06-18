@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 const CheckoutCart = () => {
   const { data: cartData, getCartItems } = useSelector((state) => state.cart);
+
   return (
     <div>
       <Box
@@ -189,7 +190,7 @@ const CheckoutCart = () => {
               <Text>Total</Text>
               <Box display="flex" flexDirection="row" alignItems="center">
                 <TbCurrencyRupee />
-                <Text>{`${getCartItems.totalPrice}`}</Text>
+                <Text>{`${getCartItems.withoutDiscountPrice + 30}`}</Text>
               </Box>
             </Box>
             <Heading fontSize="19px" fontWeight="500">
