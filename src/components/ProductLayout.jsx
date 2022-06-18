@@ -23,6 +23,7 @@ import {
   Stack,
   Spinner,
   Divider,
+  Skeleton,
 } from "@chakra-ui/react";
 import {
   addItemToCartAPI,
@@ -102,7 +103,9 @@ const ProductLayout = () => {
   const dispatch = useDispatch();
   const [countValue, setCountValue] = useState(0);
   const { data: cartData, addCartItem } = useSelector((state) => state.cart);
-  const { singleProduct } = useSelector((state) => state.products);
+  const { data: singleProduct, loading: singleProductLoading } = useSelector(
+    (state) => state.products.singleProduct
+  );
   const { data } = useSelector((state) => state.products.bestDeals);
   const { id } = useParams();
 
@@ -176,6 +179,7 @@ const ProductLayout = () => {
             className={style.productImage}
           />
         </div>
+
         <div className={style.details}>
           <div className="data">
             <h1 className={style.productname}>{singleProduct.name}</h1>
@@ -219,7 +223,15 @@ const ProductLayout = () => {
             </Button>
           </Flex> */}
             {!!singleProduct?.soldOut ? (
-              <Text ml={"20px"} textAlign={"left"} fontWeight={"500"} fontSize={"18px"} color={"red.300"}>{singleProduct?.soldOut}</Text>
+              <Text
+                ml={"20px"}
+                textAlign={"left"}
+                fontWeight={"500"}
+                fontSize={"18px"}
+                color={"red.300"}
+              >
+                {singleProduct?.soldOut}
+              </Text>
             ) : (
               <Stack>
                 {countValue == 0 ? (

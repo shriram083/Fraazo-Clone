@@ -62,21 +62,25 @@ const initialState = {
     data: [],
   },
   singleProduct: {
-    id: '',
-    imgUrl: '',
-    name: '',
-    packSize: '',
-    price: '',
-    strikePrice: '',
-    soldOut: '',
-    notifyme: '',
-    category: '',
-    subCatagory: '',
-    tooltipText: '',
-    benefits: '',
-    description: '',
-    info: ''
-  }
+    loading: false,
+    error: false,
+    data: {
+      id: "",
+      imgUrl: "",
+      name: "",
+      packSize: "",
+      price: "",
+      strikePrice: "",
+      soldOut: "",
+      notifyme: "",
+      category: "",
+      subCatagory: "",
+      tooltipText: "",
+      benefits: "",
+      description: "",
+      info: "",
+    },
+  },
 };
 
 export const porductsReducer = (state = initialState, { type, payload }) => {
@@ -373,10 +377,30 @@ export const porductsReducer = (state = initialState, { type, payload }) => {
         },
       };
     // single product details case starts
+    case types.GET_BEST_DEALS_LOADING:
+      return {
+        ...state,
+        singleProduct: {
+          loading: true,
+          error: false,
+        },
+      };
     case types.GET_SINGLE_PRODUCT_SUCCESS:
       return {
         ...state,
-        singleProduct: payload
+        singleProduct: {
+          loading: false,
+          error: false,
+          data: payload,
+        },
+      };
+    case types.GET_SINGLE_PRODUCT_ERROR:
+      return {
+        ...state,
+        singleProduct: {
+          loading: false,
+          error: true,
+        },
       };
     // single product details case ends
 

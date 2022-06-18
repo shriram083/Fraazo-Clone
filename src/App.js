@@ -20,7 +20,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RequiredAuth from "./hoc/RequiredAuth";
 import OtpPage from "./components/OrderStatus/OtpPage";
-
+import OrderSuccessfull from "./components/OrderStatus/OrderSuccessfull";
+import OrderFail from "./components/OrderStatus/OrderFail";
 function App() {
   const dispatch = useDispatch();
 
@@ -32,7 +33,8 @@ function App() {
       <nav>
         <Navbar />
       </nav>
-      {/* <OtpPage/> */}
+     
+     
       <Container
         style={{ padding: "20px 0 0 0" }}
         maxW="container.xl"
@@ -75,9 +77,13 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/otp" element={ <OtpPage/>} />
+          <Route path="/checkout/payment-successful" element={<OrderSuccessfull/>} />
+          <Route path="/checkout/payment-failed" element={< OrderFail/>} />
         </Routes>
       </Container>
-
+      
+      
       <footer>
         <Footer />
       </footer>
