@@ -3,6 +3,7 @@ import * as types from "./auth.types";
 const userData = JSON.parse(localStorage.getItem("userLogin")) || [];
 
 export const getOTP = (payload) => (dispatch) => {
+
   dispatch({ type: types.GET_OTP, payload: payload });
   console.log("payload:", payload);
   let x = JSON.parse(localStorage.getItem("userLogin")) || [];
@@ -15,7 +16,8 @@ export const getOTP = (payload) => (dispatch) => {
   }
 
   if (flag) {
-    dispatch({ type: types.GET_LOGIN });
+    localStorage.setItem("flag",true)
+    // dispatch({ type: types.GET_LOGIN });
   }
 };
 

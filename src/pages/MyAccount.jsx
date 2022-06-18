@@ -73,7 +73,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
   const mNumber = useSelector((otp) => otp.auth.otp.mobile);
   const accData = useSelector((otp) => otp.auth);
   console.log("mobile no", mNumber);
-  console.log("details", accData);
+    console.log("details", accData);
+    
+    const getMobileNumber = () => {
+        const { mobile } = JSON.parse(localStorage.getItem("currentLogin"))
+        return mobile;
+    }
 
   const handleLogout = () =>{
     dispatch(Userlogout())
@@ -97,7 +102,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
             width="120px"
             borderRadius="50%"
           />
-          <p>+91 {mNumber}</p>
+                  <p>+91 {getMobileNumber()}</p>
         </div>
 
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
@@ -120,6 +125,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       </NavItem>
     </Box>
   );
+
 };
 
 // interface NavItemProps extends FlexProps {

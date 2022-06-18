@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getOTP, saveDetails } from "../store/authentication/auth.actions";
+import { GET_LOGIN } from "../store/authentication/auth.types";
 
 const GetOTP = styled.button`
   background-color: #43c6ac;
@@ -56,7 +57,6 @@ const Login = () => {
   const l_name = useRef(null);
   const email = useRef(null);
   const [title, setTitle] = useState();
-  const [timer, setTimer] = useState(0);
 
   const gOTP = useSelector((otp) => otp.auth.otp.otp);
   const isAuth = useSelector((value) => value.auth.isAuth);
@@ -78,10 +78,18 @@ const Login = () => {
     console.log("current:", OTP.current.value, gOTP);
 
     if (OTP.current.value === gOTP) {
+      let flag = localStorage.getItem("flag") || false;
       // dispatch(confirmOTP(OTP.current.value))
-      OTP.current.value = "";
-      setValid(false);
-      console.log("false:");
+      if (flag) {
+        dispatch({ type: GET_LOGIN });
+        OTP.current.value = "";
+        setValid(false);
+      }
+      else {
+        OTP.current.value = "";
+        setValid(false);
+        console.log("false:");
+      }
     }
   };
 
@@ -110,18 +118,15 @@ const Login = () => {
 
   useEffect(() => {
     if (isAuth) {
-      console.log("inside");
-      const id = setInterval(() => {
-        if (timer > 5) {
-          clearInterval(id);
-          navigate("/");
-        } else {
-          setTimer((timer) => timer + 1);
-        }
-      }, 1000);
+      //console.log("inside");
+      setTimeout(() => {
+        //onClose();
+        navigate("/");
+      }, 2000);
     }
     onOpen();
   }, []);
+  
 
   return (
     <Box>
