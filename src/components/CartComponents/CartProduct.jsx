@@ -168,9 +168,9 @@ const CartProduct = ({ cartItem }) => {
     dispatch(removeItemFromCartAPI(id));
   };
 
-  useEffect(() => {
-    dispatch(getCartItemAPI());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getCartItemAPI());
+  // }, [dispatch]);
   return (
     <Box>
       <Flex height={"100px"}>

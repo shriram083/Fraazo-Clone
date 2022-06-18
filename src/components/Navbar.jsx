@@ -18,6 +18,7 @@ import { useState } from "react";
 import axios from "axios";
 import SearchBox from "./SearchBox";
 import { useEffect } from "react";
+import Login from "../pages/Login";
 // const Flex = styled.div`
 //   display: flex;
 //   justify-content: space-evenly;
@@ -209,7 +210,9 @@ const Navbar = () => {
   const { isAuth: loggedIn, userData } = useSelector((state) => state.auth);
 
   const handleLoginAccount = () => {
-    if (loggedIn) {
+    let loginStatus = localStorage.getItem("isAuth");
+    // console.log("loginStatus:", !loginStatus);
+    if (loginStatus == "true") {
       navigate("/myaccount/myorders");
     } else {
       navigate("/login");
@@ -315,7 +318,9 @@ const Navbar = () => {
             >
               <Box w={"14px"}> {userIcon}</Box>
 
-              <Text fontSize={"13px"}>{loggedIn ? (userData?.firstname) : "Login"}</Text>
+              <Text fontSize={"13px"}>
+                {loggedIn ? userData?.firstname : "Login"}
+              </Text>
             </Flex>
           </Button>
           <CartComponent isOpen={isOpen} onOpen={onOpen} onClose={onClose} />

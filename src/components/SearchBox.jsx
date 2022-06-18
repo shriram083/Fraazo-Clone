@@ -278,7 +278,7 @@ const SearchBox = () => {
             h={"50px"}
             p={"0 20px"}
             value={query}
-            onChange={(e) => debounce(e, fetchResult, 800)}
+            onChange={(e) => debounce(e, fetchResult, 700)}
           />
 
           <ModalBody

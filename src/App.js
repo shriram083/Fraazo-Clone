@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Container, useToast } from "@chakra-ui/react";
 
 import "./App.css";
 import Navbar from "./components/Navbar";
@@ -22,19 +22,50 @@ import RequiredAuth from "./hoc/RequiredAuth";
 import OtpPage from "./components/OrderStatus/OtpPage";
 import OrderSuccessfull from "./components/OrderStatus/OrderSuccessfull";
 import OrderFail from "./components/OrderStatus/OrderFail";
+import { dblClick } from "@testing-library/user-event/dist/click";
 function App() {
   const dispatch = useDispatch();
+  const toast = useToast();
+  const { getCartItems } = useSelector((state) => state.cart);
+
+  const jsonServerError = () => {
+    if (getCartItems.error) {
+      toast({
+        title: `Info`,
+        description:
+          "We have used Json local server to fetch all the product details and update, So first you need to download `db.json` file from GitHub",
+        status: "info",
+        position: "top",
+        duration: 15000,
+        isClosable: true,
+      });
+      toast({
+        title: `Json-server is not started`,
+        description:
+          "Please make sure that you have started json-server on port 8080",
+        status: "info",
+        position: "top",
+        duration: 12000,
+        isClosable: true,
+      });
+    }
+    // console.log("error", getCartItems.error);
+    // toast.closeAll();
+  };
 
   useEffect(() => {
     dispatch(getCartItemAPI());
+    jsonServerError();
   }, []);
+  useEffect(() => {
+    jsonServerError();
+  }, [getCartItems.error]);
   return (
-    <Container className="App" maxW={"none"}>
+    <Container className="App" maxW={"none"} p={0}>
       <nav>
         <Navbar />
       </nav>
-     
-     
+
       <Container
         style={{ padding: "20px 0 0 0" }}
         maxW="container.xl"
@@ -73,17 +104,25 @@ function App() {
             element={<Products />}
           />
 
-          <Route path="/Checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout/otp" element={ <OtpPage/>} />
-          <Route path="/checkout/payment-successful" element={<OrderSuccessfull/>} />
-          <Route path="/checkout/payment-failed" element={< OrderFail/>} />
+          <Route
+            path="/checkout"
+            element={
+              <RequiredAuth>
+                <Checkout />
+              </RequiredAuth>
+            }
+          />
+          <Route path="/checkout/otp" element={<OtpPage />} />
+          <Route
+            path="/checkout/payment-successful"
+            element={<OrderSuccessfull />}
+          />
+          <Route path="/checkout/payment-failed" element={<OrderFail />} />
         </Routes>
       </Container>
-      
-      
+
       <footer>
         <Footer />
       </footer>
