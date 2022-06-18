@@ -31,6 +31,7 @@ const sliderImg = [
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3768.png", id: 3768 },
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3770.png", id: 3770 },
   { img: "https://images.fraazo.com/fraazo-prod/web_ban/3671.png", id: 3771 },
+  { img: "https://images.fraazo.com/fraazo-prod/web_ban/3945.png", id: 3945 },
 ];
 const Home = () => {
   const dispatch = useDispatch();
