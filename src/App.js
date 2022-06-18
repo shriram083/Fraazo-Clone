@@ -19,6 +19,7 @@ import { getCartItemAPI } from "./store/cart/cart.actions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RequiredAuth from "./hoc/RequiredAuth";
+import OtpPage from "./components/OrderStatus/OtpPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,12 +32,13 @@ function App() {
       <nav>
         <Navbar />
       </nav>
-
+      {/* <OtpPage/> */}
       <Container
-        style={{ padding: "20px 0 0 0", border: "1px solid blue" }}
+        style={{ padding: "20px 0 0 0" }}
         maxW="container.xl"
         mt={"88px"}
         boxSizing="border-box"
+        // display={"none"}
       >
         <Routes>
           <Route path="*" element={<ErrorPage />} />
