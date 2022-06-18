@@ -78,7 +78,6 @@ const SidebarContent = ({ onClose, ...rest }) => {
             borderRight="1px"
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
             w={{ base: 'full', md: 60 }}
-            pos="fixed"
             h="500px"
             {...rest}>
             <Flex h="40" alignItems="center" mx="8" justifyContent="space-between">
@@ -91,7 +90,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
             {LinkItems.map((link) => (
-                <NavItem key={link.name} onClick={() => navigate(`/myaccount/${link.add}`)}>
+                <NavItem key={link.name} onClick={() => navigate(`/myaccount/${link.add}`)} >
                     <Image src={ link.icon } mr="10px"/>
                     {link.name}
                 </NavItem>

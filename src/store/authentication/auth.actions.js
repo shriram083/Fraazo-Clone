@@ -6,7 +6,7 @@ export const getOTP = (payload) => (dispatch) => {
     
     dispatch({ type: types.GET_OTP, payload: payload })
     console.log('payload:', payload)
-    let x = JSON.parse(localStorage.getItem("userLogin"))
+    let x = JSON.parse(localStorage.getItem("userLogin")) || []
     let flag = false;
     for (let i = 0; i < x.length; i++) {
         if (payload.mobile === x[i].mobile) {

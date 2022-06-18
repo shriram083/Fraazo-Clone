@@ -53,6 +53,7 @@ const Login = () => {
 
     const handleOTP = () => {
         let x = initialRef.current.value
+        console.log('x:', x,x.length)
         if (x.length === 10) {
             let generatedOTP = generateOTP()
             dispatch(getOTP({ mobile: initialRef.current.value, otp: generatedOTP }))
