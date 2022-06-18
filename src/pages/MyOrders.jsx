@@ -1,7 +1,9 @@
 import { Button } from '@chakra-ui/react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const MyOrders = () => {
+  const navigate = useNavigate();
   return (
     <div >
       <div style={{ fontSize:"28px",textAlign:"left" , marginLeft:"20px"}}>
@@ -13,7 +15,7 @@ const MyOrders = () => {
       <div style={{ gap:"10px" }}>
         <div style={{ fontSize: "18px" }}>No Orders Found!</div>
         <div style={{ fontSize: "14px" }}>Lets Add Some Items!</div>
-        <Button style={{ backgroundColor: "#47c09d", color:"white" }}>START SHOPPING</Button>
+        <Button style={{ backgroundColor: "#47c09d", color:"white" }} onClick={()=>navigate("/")}>START SHOPPING</Button>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import HomeLogo from "../assets/homeLogo.svg";
 import {
@@ -12,11 +12,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import CartComponent from "./CartComponents/CartComponent";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import axios from "axios";
 import SearchBox from "./SearchBox";
+import { useEffect } from "react";
 // const Flex = styled.div`
 //   display: flex;
 //   justify-content: space-evenly;
@@ -204,7 +205,19 @@ const locationSvg = (
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { data: cartData } = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+  const { isAuth: loggedIn, userData } = useSelector((state) => state.auth);
 
+  const handleLoginAccount = () => {
+    if (loggedIn) {
+      navigate("/myaccount/myorders");
+    } else {
+      navigate("/login");
+    }
+  };
+  useEffect(() => {
+    console.log("login", loggedIn, userData);
+  }, [userData]);
   return (
     <Box
       boxShadow={"base"}
@@ -246,7 +259,7 @@ const Navbar = () => {
             </Text>
           </Flex>
         </Flex>
-        
+
         <SearchBox />
 
         <Flex justifyContent={"space-evenly"} gap={8}>
@@ -293,7 +306,7 @@ const Navbar = () => {
               <Text fontSize={"13px"}>Credits</Text>
             </Flex>
           </Button>
-          <Button variant="unstyled">
+          <Button variant="unstyled" onClick={() => handleLoginAccount()}>
             <Flex
               alignItems={"center"}
               gap={2}
@@ -302,7 +315,7 @@ const Navbar = () => {
             >
               <Box w={"14px"}> {userIcon}</Box>
 
-              <Text fontSize={"13px"}>Login</Text>
+              <Text fontSize={"13px"}>{loggedIn ? (userData?.firstname) : "Login"}</Text>
             </Flex>
           </Button>
           <CartComponent isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
