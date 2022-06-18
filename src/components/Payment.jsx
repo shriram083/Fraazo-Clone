@@ -3,10 +3,18 @@ import {
   Button,
   Checkbox,
   color,
+  Flex,
   Img,
   Input,
   InputGroup,
   InputRightElement,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
   Select,
   Stack,
   Tab,
@@ -14,10 +22,13 @@ import {
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
+  useToast,
 } from "@chakra-ui/react";
 import { CgFormatSlash } from "react-icons/cg";
 import React, { useState } from "react";
 import { BillDetails } from "./BillDetails";
+import { useNavigate } from "react-router";
 let initState = {
   cardNumber: "",
   expiryMonth: "",
@@ -31,7 +42,7 @@ localStorage.setItem(
   JSON.stringify({
     cardNumber: "1234567891234567",
     expiryMonth: "01",
-    expiryYear: "22",
+    expiryYear: "24",
     cardName: "fraazo",
     cvv: "123",
   })
@@ -40,9 +51,9 @@ localStorage.setItem(
 ///////////
 const Payment = () => {
   const [cardPaymentDetails, setCardPaymentDetails] = useState(initState);
-
+  const toast = useToast();
   //////// HANDLING ON CHANGE
-
+const navigate = useNavigate();
   const handleOnChange = (e) => {
     let { name, value } = e.target;
     //  console.log("card", name, value, name.length);
@@ -94,7 +105,16 @@ const Payment = () => {
       savedPaymentDetails.cvv === cardPaymentDetails.cvv
     ) {
       console.log("CARD PAYMENT SUCCESS");
+      navigate("/checkout/otp");
     } else {
+      toast({
+        title: `Please Enter Valid Card Details`,
+        description: "",
+        status: "warning",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
       console.log("CARD PAYMENT FAILURE");
     }
   };
@@ -223,16 +243,51 @@ const Payment = () => {
           <TabPanels>
             <TabPanel width="100%" border="1px solid red">
               <div mb="25px">
-                <p
-                  align="left"
-                  style={{
-                    color: "grey",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                  }}
-                >
-                  Card number
-                </p>
+                <Flex justifyContent={"space-between"}>
+                  <p
+                    align="left"
+                    style={{
+                      color: "grey",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Card number
+                  </p>
+                  <Popover>
+                    <PopoverTrigger>
+                      <Button size="sm">Demo Card Details</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverCloseButton />
+                      <PopoverHeader fontWeight={600}>
+                        Card Details for Demo
+                      </PopoverHeader>
+
+                      <PopoverBody>
+                        <Flex gap={3} justifyContent="center">
+                          <Box
+                            justifyContent={"flex-end"}
+                            textAlign={"right"}
+                            fontWeight={500}
+                          >
+                            <Text>Card Number:</Text>
+                            <Text>Expiry (MM/YY):</Text>
+                            <Text>CVV :</Text>
+                            <Text>Name :</Text>
+                          </Box>
+                          <Box justifyContent={"flex-start"} textAlign={"left"}>
+                            <Text> 1234567891234567</Text>
+                            <Text> 01/24</Text>
+                            <Text> 123</Text>
+                            <Text> Anything</Text>
+                          </Box>
+                        </Flex>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Popover>
+                </Flex>
                 <Stack spacing={3} mb="40px">
                   <Input
                     variant="flushed"

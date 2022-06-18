@@ -1,10 +1,14 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { useEffect } from "react";
 import { TbCurrencyRupee } from "react-icons/tb";
 import { useSelector } from "react-redux";
 
 export const BillDetails = () => {
   const { data: cartData, getCartItems } = useSelector((state) => state.cart);
+  useEffect(()=>{
+    localStorage.setItem("totalAmt",Number(getCartItems.withDiscountPrice)+30);
+  },[getCartItems])
   return (
     <div>
       <Box
@@ -118,7 +122,7 @@ export const BillDetails = () => {
             <Text>Total</Text>
             <Box display="flex" flexDirection="row" alignItems="center">
               <TbCurrencyRupee />
-              <Text>{`${getCartItems.totalPrice}`}</Text>
+              <Text>{`${getCartItems.withDiscountPrice + 30}`}</Text>
             </Box>
           </Box>
           <Heading fontSize="19px" fontWeight="500">

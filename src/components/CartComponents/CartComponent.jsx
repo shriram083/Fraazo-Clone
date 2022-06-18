@@ -18,10 +18,11 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRef } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { getCartItemAPI } from "../../store/cart/cart.actions";
 const AddCartFlex = styled.div`
   display: flex;
   width: 100%;
@@ -44,8 +45,12 @@ const CartComponent = ({ isOpen, onOpen, onClose }) => {
   const size = "sm";
   const { data: cartData, getCartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
-  // console.log("total:", getCartItems.withoutDiscountPrice);
-  // console.log("discount:", getCartItems.withDiscountPrice);
+  const dispatch = useDispatch();
+  console.log("total:", getCartItems.withoutDiscountPrice);
+  console.log("discount:", getCartItems.withDiscountPrice);
+  useEffect(() => {
+    dispatch(getCartItemAPI());
+  }, [dispatch,getCartItemAPI]);
   return (
     <>
       <Drawer onClose={onClose} isOpen={isOpen} size={size}>
