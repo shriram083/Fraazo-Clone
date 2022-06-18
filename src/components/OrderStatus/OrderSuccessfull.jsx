@@ -1,6 +1,25 @@
 import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
+import axios from "axios";
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartItemAPI } from "../../store/cart/cart.actions";
+
 const OrderSuccessfull = () => {
+  const { data: cartData } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const removeItemFromCartAPI = () => {
+    if (cartData?.length != 0) {
+      for (let i = 0; i < cartData?.length; i++) {
+        console.log("id", cartData[i].id);
+        axios
+          .delete(`/cartItems/${cartData[i].id}`)
+          .then((r) => console.log("removed Data:", r.data))
+          .catch((e) => console.log("err", e.data));
+      }
+      dispatch(getCartItemAPI());
+    }
+  };
+
   const getAmt = () => {
     const amt = localStorage.getItem("totalAmt") || 170;
     return amt;
@@ -15,6 +34,22 @@ const OrderSuccessfull = () => {
       otp = otp + digits[index];
     }
     return otp;
+  };
+  const getOrderId = () => {
+    let totalItems = Number(localStorage.getItem("TotalCartItems"));
+    // console.log('totalItems:', totalItems)
+
+    // let totalItems = 2;
+    let OrderIds = [];
+    for (let i = 0; i < totalItems; i++) {
+      OrderIds.push(generateRandomNum(9));
+    }
+    // console.log(OrderIds);
+    if (OrderIds.length == 1) {
+      return `Order ID: ${OrderIds.join(",")}`;
+    } else {
+      return `Order ID(s): ${OrderIds.join(",")}`;
+    }
   };
   const getRefNum = () => {
     let currDate = new Date();
@@ -36,8 +71,10 @@ const OrderSuccessfull = () => {
     return refNum;
   };
   useEffect(() => {
-    window.scroll(0,0);
-   }, []);
+    window.scroll(0, 0);
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+    removeItemFromCartAPI();
+  }, []);
   return (
     <Flex
       flexDirection={"row"}
@@ -86,7 +123,6 @@ const OrderSuccessfull = () => {
           <Button
             color={"white"}
             bg={"#fc9916"}
-           
             _hover={{ backgroundColor: "#fc9916" }}
           >
             GO TO MY ORDERS
@@ -106,7 +142,7 @@ const OrderSuccessfull = () => {
           border={"1px solid rgba(0, 0, 0, 0.17)"}
         >
           <Text fontSize={"12px"} color={"#68919d"}>
-            Order ID(s): 348774387,237433838
+            {getOrderId()}
           </Text>
           <Text fontSize={"12px"} color={"#68919d"}>
             Payment Ref. Number - <span>{getRefNum()}</span>{" "}

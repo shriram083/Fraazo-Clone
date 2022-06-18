@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { useSelector } from "react-redux";
 const getDate = () => {
   return new Date().toDateString();
 };
@@ -60,6 +61,7 @@ const OtpPage = () => {
   const [userOtp, setUserOtp] = useState("");
   const [time, setTime] = useState(60);
   const [loading, setLoading] = useState(loading1);
+  const { data: cartData } = useSelector((state) => state.cart);
   const [loadingText, setLoadingText] = useState(
     "Your request is being processed. Please do not click your browser's Back or Refresh button"
   );
@@ -69,6 +71,8 @@ const OtpPage = () => {
   // console.log("history", browserHistory)
 
   const verifyOtp = () => {
+    localStorage.setItem("TotalCartItems", cartData?.length);
+
     console.log("opt", userOtp);
     let actualOtp = localStorage.getItem("PaymentOtp");
     if (userOtp == actualOtp) {
