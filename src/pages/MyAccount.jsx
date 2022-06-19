@@ -22,6 +22,7 @@ import logout from "../assets/logout.svg";
 import mycredit from "../assets/mycredit.png";
 import support from "../assets/support.svg";
 import { Userlogout } from "../store/authentication/auth.actions";
+import { useEffect } from "react";
 
 const LinkItems = [
   { name: "My Orders", icon: myorder, add: "myorders" },
@@ -32,6 +33,9 @@ const LinkItems = [
 
 export const SimpleSidebar = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
   return (
     <div style={{ display: "grid", gridTemplateColumns: "18% 80%" }}>
       <Box minH="70vh" bg={useColorModeValue("", "gray.900")}>
@@ -68,22 +72,22 @@ export const SimpleSidebar = ({ children }) => {
 // }
 
 const SidebarContent = ({ onClose, ...rest }) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const mNumber = useSelector((otp) => otp.auth.otp.mobile);
   const accData = useSelector((otp) => otp.auth);
   console.log("mobile no", mNumber);
-    console.log("details", accData);
-    
-    const getMobileNumber = () => {
-        const { mobile } = JSON.parse(localStorage.getItem("currentLogin"))
-        return mobile;
-    }
+  console.log("details", accData);
 
-  const handleLogout = () =>{
-    dispatch(Userlogout())
+  const getMobileNumber = () => {
+    const { mobile } = JSON.parse(localStorage.getItem("currentLogin"));
+    return mobile;
+  };
+
+  const handleLogout = () => {
+    dispatch(Userlogout());
     navigate("/");
-  }
+  };
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -102,7 +106,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
             width="120px"
             borderRadius="50%"
           />
-                  <p>+91 {getMobileNumber()}</p>
+          <p>+91 {getMobileNumber()}</p>
         </div>
 
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
@@ -116,16 +120,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
           {link.name}
         </NavItem>
       ))}
-      <NavItem
-        color={"red.500"}
-        onClick={() => handleLogout()}
-      >
+      <NavItem color={"red.500"} onClick={() => handleLogout()}>
         <Image src={logout} mr="10px" />
         {"Logout"}
       </NavItem>
     </Box>
   );
-
 };
 
 // interface NavItemProps extends FlexProps {
@@ -134,16 +134,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
 // }
 const NavItem = ({ icon, children, ...rest }) => {
   return (
-    <Link
-      
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
+    <Link style={{ textDecoration: "none" }} _focus={{ boxShadow: "none" }}>
       <Flex
         align="center"
         p="4"
         mx="4"
-        // borderRadius="lg"  
+        // borderRadius="lg"
         role="group"
         cursor="pointer"
         _hover={{
