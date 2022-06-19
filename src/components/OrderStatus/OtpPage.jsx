@@ -148,6 +148,29 @@ const OtpPage = () => {
     return ` ${min > 9 ? min : "0" + min}m : ${sec > 9 ? sec : "0" + sec}s `;
   };
 
+  const getCardNum = () => {
+    let { cardNumber } = JSON.parse(localStorage.getItem("savedPaymentDetails"));
+    // console.log("card Details:", cardNumber);
+    let secureCardNum = "";
+    for (let i = 0; i < cardNumber?.length; i++) {
+      if (
+        i == 0 ||
+        i == 1 ||
+        i == 2 ||
+        i == 3 ||
+        i == 15 ||
+        i == 16 ||
+        i == 17 ||
+        i == 18
+      ) {
+        secureCardNum += cardNumber[i];
+      } else {
+        secureCardNum += "x";
+      }
+    }
+    // console.log("card",secureCardNum);
+    return secureCardNum;
+  };
   useEffect(() => {
     let timer;
 
@@ -237,7 +260,9 @@ const OtpPage = () => {
           </Flex>
           <Flex gap={1} flexDirection={"column"} textAlign="start">
             <Text id="payDate"> {getDate()}</Text>
-            <Text id="secureCardNum">6521xxxxxxxxxxxx4000</Text>
+            <Text id="secureCardNum">
+              {getCardNum() ? getCardNum() : "6521xxxxxxxxxxxx4000"}
+            </Text>
             <Text id="secureNum"> {getSecureNum()}</Text>
           </Flex>
         </Flex>

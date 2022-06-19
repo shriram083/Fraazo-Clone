@@ -211,16 +211,14 @@ const Navbar = () => {
 
   const handleLoginAccount = () => {
     let loginStatus = localStorage.getItem("isAuth");
-    // console.log("loginStatus:", !loginStatus);
+    // console.log("loginStatus:", loginStatus);
     if (loginStatus == "true") {
       navigate("/myaccount/myorders");
     } else {
       navigate("/login");
     }
   };
-  useEffect(() => {
-    console.log("login", loggedIn, userData);
-  }, [userData]);
+
   return (
     <Box
       boxShadow={"base"}
@@ -297,7 +295,13 @@ const Navbar = () => {
               {cartData?.length}
             </Flex>
           </Button>
-          <Button variant="unstyled" disabled>
+          <Button
+            variant="unstyled"
+            disabled={!loggedIn}
+            onClick={() => {
+              navigate("/myaccount/mycredits");
+            }}
+          >
             <Flex
               alignItems={"center"}
               gap={2}

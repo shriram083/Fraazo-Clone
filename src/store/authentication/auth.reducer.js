@@ -25,8 +25,9 @@ export const authReducer = (state = initialState, { type, payload }) => {
         userData: JSON.parse(localStorage.getItem("currentLogin")),
       };
     case types.LOGOUT:
-      localStorage.setItem("isAuth", false);
+      localStorage.removeItem("isAuth");
       localStorage.removeItem("currentLogin");
+      localStorage.removeItem("flag");
       return {
         ...state,
         isAuth: false,

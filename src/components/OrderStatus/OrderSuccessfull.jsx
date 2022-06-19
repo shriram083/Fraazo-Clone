@@ -2,11 +2,13 @@ import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { getCartItemAPI } from "../../store/cart/cart.actions";
 
 const OrderSuccessfull = () => {
   const { data: cartData } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const removeItemFromCartAPI = () => {
     if (cartData?.length != 0) {
       for (let i = 0; i < cartData?.length; i++) {
@@ -119,13 +121,23 @@ const OrderSuccessfull = () => {
             </Text>
           </Flex>
         </Box>
-        <Box mt={"20px"}>
+        <Box mt={"20px"} mb={"20px"}>
           <Button
             color={"white"}
             bg={"#fc9916"}
             _hover={{ backgroundColor: "#fc9916" }}
+            onClick={()=>navigate("/")}
           >
-            GO TO MY ORDERS
+            GO TO HOME
+          </Button>
+          <Button
+            color={"white"}
+            bg={"#fc9916"}
+            ml={2}
+            _hover={{ backgroundColor: "#fc9916" }}
+            onClick={()=>window.print()}
+          >
+            Print Receipt
           </Button>
         </Box>
       </Flex>

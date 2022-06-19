@@ -14,6 +14,22 @@ const OrderFail = () => {
     }
     return otp;
   };
+  const getOrderId = () => {
+    let totalItems = Number(localStorage.getItem("TotalCartItems"));
+    // console.log('totalItems:', totalItems)
+
+    // let totalItems = 2;
+    let OrderIds = [];
+    for (let i = 0; i < totalItems; i++) {
+      OrderIds.push(generateRandomNum(9));
+    }
+    // console.log(OrderIds);
+    if (OrderIds.length == 1) {
+      return `Order ID: ${OrderIds.join(",")}`;
+    } else {
+      return `Order ID(s): ${OrderIds.join(",")}`;
+    }
+  };
   const getRefNum = () => {
     let currDate = new Date();
     let year = currDate.getFullYear().toString();
@@ -34,9 +50,9 @@ const OrderFail = () => {
     return refNum;
   };
   useEffect(() => {
-   window.scroll(0,0);
+    window.scroll(0, 0);
   }, []);
-  
+
   return (
     <Flex
       flexDirection={"row"}
@@ -87,7 +103,7 @@ const OrderFail = () => {
             bg={"#fc9916"}
             p={"0 40px"}
             _hover={{ backgroundColor: "#fc9916" }}
-            onClick={()=>navigate("/checkout")}
+            onClick={() => navigate("/checkout")}
           >
             TRY AGAIN
           </Button>
@@ -106,7 +122,7 @@ const OrderFail = () => {
           border={"1px solid rgba(0, 0, 0, 0.17)"}
         >
           <Text fontSize={"12px"} color={"#68919d"}>
-            Order ID(s): 348774387,237433838
+            {getOrderId()}
           </Text>
           <Text fontSize={"12px"} color={"#68919d"}>
             Payment Ref. Number - <span>{getRefNum()}</span>{" "}

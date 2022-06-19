@@ -278,7 +278,7 @@ const SearchBox = () => {
             h={"50px"}
             p={"0 20px"}
             value={query}
-            onChange={(e) => debounce(e, fetchResult, 700)}
+            onChange={(e) => debounce(e, fetchResult, 600)}
           />
 
           <ModalBody
@@ -388,7 +388,9 @@ const SearchBox = () => {
                       <Flex justifyContent={"space-between"} w={"82px"}>
                         <Stack>
                           {!!item?.soldOut ? (
-                            <Text fontSize={"13px"} color={"red.300"}>Out of Stock</Text>
+                            <Text fontSize={"13px"} color={"red.300"}>
+                              Out of Stock
+                            </Text>
                           ) : (
                             <Flex justifyContent="center" alignItems={"center"}>
                               <Stack>
