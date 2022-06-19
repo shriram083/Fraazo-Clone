@@ -60,7 +60,9 @@ const OtpPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userOtp, setUserOtp] = useState("");
   const [time, setTime] = useState(60);
-  const [loading, setLoading] = useState(loading1);
+  const [loading, setLoading] = useState(
+    "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/master/src/assets/yourRequestIseBeingProcessed.gif"
+  );
   const { data: cartData } = useSelector((state) => state.cart);
   const [loadingText, setLoadingText] = useState(
     "Your request is being processed. Please do not click your browser's Back or Refresh button"
@@ -88,7 +90,9 @@ const OtpPage = () => {
       toast.closeAll();
       onOpen();
       setTimeout(() => {
-        setLoading(loading2);
+        setLoading(
+          "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/master/src/assets/dotsLoading.gif"
+        );
         setLoadingText("Please do not press 'Back' or 'Refresh' button");
       }, 2000);
       setTimeout(() => {
@@ -115,7 +119,7 @@ const OtpPage = () => {
       onClose();
       browserHistory.replace("/");
       navigate("/checkout/payment-failed");
-    }, 4000);
+    }, 2000);
   };
   // window.onload = (event) => {
   //   toast.closeAll();
@@ -149,7 +153,9 @@ const OtpPage = () => {
   };
 
   const getCardNum = () => {
-    let { cardNumber } = JSON.parse(localStorage.getItem("savedPaymentDetails"));
+    let { cardNumber } = JSON.parse(
+      localStorage.getItem("savedPaymentDetails")
+    );
     // console.log("card Details:", cardNumber);
     let secureCardNum = "";
     for (let i = 0; i < cardNumber?.length; i++) {

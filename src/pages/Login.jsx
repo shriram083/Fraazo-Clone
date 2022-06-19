@@ -91,11 +91,11 @@ const Login = () => {
         setValid(false);
         console.log("false:");
       }
-    }else{
+    } else {
       console.log("wrong otp");
       toast({
         title: `Please Enter Correct OTP`,
-        description:"",
+        description: "",
         status: "warning",
         position: "top",
         duration: 2000,
@@ -155,6 +155,7 @@ const Login = () => {
                 {/* <FormLabel>First name</FormLabel> */}
                 <InputBar
                   ref={initialRef}
+                  maxLength={"10"}
                   placeholder="Enter Your Mobile Number"
                 />
               </FormControl>
@@ -199,7 +200,7 @@ const Login = () => {
           </ModalContent>
         ) : isAuth ? (
           <ModalContent borderRadius="20px" textAlign="center">
-            <ModalCloseButton />
+            <ModalCloseButton onClick={() => navigate("/")} />
             <ModalHeader>Welcome to Fraazo!</ModalHeader>
             <ModalBody
               p="20px"

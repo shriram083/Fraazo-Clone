@@ -28,7 +28,11 @@ const LinkItems = [
   { name: "My Orders", icon: myorder, add: "myorders" },
   { name: "My Credits", icon: mycredit, add: "mycredits" },
   { name: "Invite A Friend", icon: invite, add: "invite" },
-  { name: "Help & Support", icon: support, add: "support" },
+  {
+    name: "Help & Support",
+    icon: "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/284b6e2ffac46355138edb6633b44ae79b800e0d/src/assets/support.svg",
+    add: "support",
+  },
 ];
 
 export const SimpleSidebar = ({ children }) => {
@@ -121,7 +125,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </NavItem>
       ))}
       <NavItem color={"red.500"} onClick={() => handleLogout()}>
-        <Image src={logout} mr="10px" />
+        <Image
+          src={
+            "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/284b6e2ffac46355138edb6633b44ae79b800e0d/src/assets/logout.svg"
+          }
+          mr="10px"
+        />
         {"Logout"}
       </NavItem>
     </Box>
