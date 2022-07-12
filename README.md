@@ -1,6 +1,6 @@
 # “Fraazo.com” Website Clone
 
-![Homepage ](./screenshots/HomePage.png)
+![Homepage ](./client/screenshots/HomePage.png)
 
 ### Fraazo is the online online store to buy fresh fruits and vegetables, herbs and dry fruits.
 
@@ -53,31 +53,31 @@ This is the main landing page of our website. Here clicking on any option on the
 
 This page is functional and responsive.
 
-![Homepage ](./screenshots/HomePage.png)
+![Homepage ](./client/screenshots/HomePage.png)
 
 #### Navigation bar -
 
 If the user clicks on the SignUp/login page it shows the pages of that section and also Searching of product with debouncing feature.
 
-![Navigation bar](./screenshots/SearchBox.png)
+![Navigation bar](./client/screenshots/SearchBox.png)
 
 #### Sign up / Sign in Page -
 
 On this page, you can register a user. If the user is already registered, you can simply sign in by providing valid details of the user.
 
-![Sign up](./screenshots/Login.png)
+![Sign up](./client/screenshots/Login.png)
 
 #### Products Page -
 
 Here users can browse and add items to the cart by clicking on the Add to Cart button.
 
-![Products Page](./screenshots/ProductsPage.png)
+![Products Page](./client/screenshots/ProductsPage.png)
 
 #### Cart Page -
 
 Here all the products added to the cart will be shown. On this page, you can also remove the items. By clicking on the “CHECKOUT” button you will be redirected to the checkout page.
 
-![Cart](./screenshots/Cart.png)
+![Cart](./client/screenshots/Cart.png)
 
 #### Payment Page -
 
@@ -85,21 +85,21 @@ On this page, users can add their address details and add their payment details.
 
 By providing these details users can place orders by clicking the “PLACE ORDER” button.
 
-![Products Page](./screenshots/PaymentPage.png)
+![Products Page](./client/screenshots/PaymentPage.png)
 
 After Proceeding users get will get OTP page
 
-![OTP Page](./screenshots/OTPPaget.png)
+![OTP Page](./client/screenshots/OTPPaget.png)
 
 If user entered correct OTP it will redirect to payment succefull page or elese it entered wrong it will get error as wrong OTP
 
-![Products Page](./screenshots/PaymentSuccefull.png)
+![Products Page](./client/screenshots/PaymentSuccefull.png)
 
 After Payment Success you will be redirected to the Home Page.
 
 In case you clicked on cancel on OTP Page it will redirect to this page.
 
-![Products Page](./screenshots/PaymentFail.png)
+![Products Page](./client/screenshots/PaymentFail.png)
 
 ## Run Locally
 
