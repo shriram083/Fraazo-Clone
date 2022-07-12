@@ -141,4 +141,4 @@ Start the local API server
 
 ### Vercel Link
 
-[https://fraazo-clone-web-17-rtc101.vercel.app//](https://fraazo-clone-web-17-rtc101.vercel.app/)
+[https://fraazo-clone-web-17-rtc101.vercel.app/](https://fraazo-clone-web-17-rtc101.vercel.app/)
