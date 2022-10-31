@@ -10,16 +10,8 @@ const OrderSuccessfull = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const removeItemFromCartAPI = () => {
-    if (cartData?.length != 0) {
-      for (let i = 0; i < cartData?.length; i++) {
-        console.log("id", cartData[i].id);
-        axios
-          .delete(`/cartItems/${cartData[i].id}`)
-          .then((r) => console.log("removed Data:", r.data))
-          .catch((e) => console.log("err", e.data));
-      }
-      dispatch(getCartItemAPI());
-    }
+    localStorage.setItem("cartItems", JSON.stringify([]));
+    dispatch(getCartItemAPI());
   };
 
   const getAmt = () => {
@@ -126,7 +118,7 @@ const OrderSuccessfull = () => {
             color={"white"}
             bg={"#fc9916"}
             _hover={{ backgroundColor: "#fc9916" }}
-            onClick={()=>navigate("/")}
+            onClick={() => navigate("/")}
           >
             GO TO HOME
           </Button>
@@ -135,7 +127,7 @@ const OrderSuccessfull = () => {
             bg={"#fc9916"}
             ml={2}
             _hover={{ backgroundColor: "#fc9916" }}
-            onClick={()=>window.print()}
+            onClick={() => window.print()}
           >
             Print Receipt
           </Button>
