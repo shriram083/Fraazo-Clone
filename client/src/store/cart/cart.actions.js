@@ -54,7 +54,7 @@ const addItemToCartAPI = (payload) => (dispatch) => {
   dispatch(addItemToCartLoading(payload));
 
   setTimeout(() => {
-    console.log("add Item...");
+    // console.log("add Item...");
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     payload = { ...payload, _id: uuidv4(), createdAt: new Date().toJSON() };
     cartItems.push(payload);
@@ -92,7 +92,7 @@ const updateCartItemAPI = (payload) => (dispatch) => {
   dispatch(updateCartItemLoading(payload));
 
   setTimeout(() => {
-    console.log("fetch details...");
+    // console.log("fetch details...");
     let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     if (cartItems.length > 0) {
       let updated = cartItems.filter((item) => {

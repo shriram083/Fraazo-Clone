@@ -101,7 +101,7 @@ const AllProductsLayout = ({ product }) => {
             _productId: item._id,
             productId: item.id,
             count: 1,
-            imgUrl: item.imgUrl,
+            imgUrl: ValidImgUrl,
             name: item.name,
             packSize: item.packSize,
             price: item.price,

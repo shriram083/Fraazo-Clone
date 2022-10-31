@@ -46,7 +46,7 @@ const CartComponent = ({ isOpen, onOpen, onClose }) => {
   const { data: cartData, getCartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log("total:", getCartItems.withoutDiscountPrice);
+  // console.log("total:", getCartItems.withoutDiscountPrice);
   // console.log("discount:", getCartItems.withDiscountPrice);
   useEffect(() => {
     dispatch(getCartItemAPI());

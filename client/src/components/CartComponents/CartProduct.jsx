@@ -148,7 +148,7 @@ const CartProduct = ({ cartItem }) => {
   // console.log("cart items:", cartItem);
 
   const handleUpdate = (id, value) => {
-    console.log("update state", id, value);
+    // console.log("update state", id, value);
     // let update = cartData.filter((data) => data.productId == id);
     // console.log("update state", id, value, update);
     // console.log("update state",cartData,cartItem);

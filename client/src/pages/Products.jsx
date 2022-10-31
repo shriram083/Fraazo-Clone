@@ -56,7 +56,7 @@ const Products = () => {
   // console.log(premiumQualityDryFruits.data);
 
   const findSubcategoryFromPath = (subcategory) => {
-    console.log(subcategory);
+    // console.log(subcategory);
     if (subcategory == undefined || subcategory == null) {
       setProductsData(mangoes.data);
       return true;

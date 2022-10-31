@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 const RequiredAuth = ({ children }) => {
   const location = useLocation();
   const {isAuth} = useSelector((value) => value.auth);
-  console.log("required auth");
+  // console.log("required auth");
   const form = {
     pathname: location.pathname,
   };

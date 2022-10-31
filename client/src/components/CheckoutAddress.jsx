@@ -57,7 +57,7 @@ const CheckoutCart = () => {
 
   const hadnleSubmit = (event) => {
     event.preventDefault();
-    console.log(formData);
+    // console.log(formData);
     setFormData({
       completeAddress: "",
       flatNo: "",

@@ -334,7 +334,7 @@ const getSingleProductAPI = (id) => (dispatch) => {
   axios
     .get(`/fraazo/${id}`)
     .then((r) => {
-      console.log(r.data, "from reducer function");
+      // console.log(r.data, "from reducer function");
       dispatch(getSingleProductSuccess(r.data));
     })
     .catch((e) => dispatch(getSingleProductError(e.data)));

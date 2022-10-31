@@ -80,8 +80,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
   const navigate = useNavigate();
   const mNumber = useSelector((otp) => otp.auth.otp.mobile);
   const accData = useSelector((otp) => otp.auth);
-  console.log("mobile no", mNumber);
-  console.log("details", accData);
+  // console.log("mobile no", mNumber);
+  // console.log("details", accData);
 
   const getMobileNumber = () => {
     const { mobile } = JSON.parse(localStorage.getItem("currentLogin"));

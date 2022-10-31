@@ -68,7 +68,7 @@ const Checkout = () => {
                   className="fa-solid fa-cart-shopping"
                   accessKey="1"
                   onClick={(e) => {
-                    console.log(e.target.accessKey);
+                    // console.log(e.target.accessKey);
                     setTabs(Number(e.target.accessKey));
                   }}
                 ></i>
@@ -88,7 +88,7 @@ const Checkout = () => {
                   className="fa-solid fa-location-dot"
                   accessKey="2"
                   onClick={(e) => {
-                    console.log(e.target.accessKey);
+                    // console.log(e.target.accessKey);
                     setTabs(Number(e.target.accessKey));
                   }}
                 ></i>
@@ -108,7 +108,7 @@ const Checkout = () => {
                   className="fa-regular fa-calendar"
                   accessKey="3"
                   onClick={(e) => {
-                    console.log(e.target.accessKey);
+                    // console.log(e.target.accessKey);
                     setTabs(Number(e.target.accessKey));
                   }}
                 ></i>
@@ -128,7 +128,7 @@ const Checkout = () => {
                   className="fa-solid fa-wallet"
                   accessKey="4"
                   onClick={(e) => {
-                    console.log(e.target.accessKey);
+                    // console.log(e.target.accessKey);
                     setTabs(Number(e.target.accessKey));
                   }}
                 ></i>

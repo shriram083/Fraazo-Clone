@@ -8,7 +8,7 @@ const ProductsSlider = ({ data, loading }) => {
   let [curSlide, setCurSlide] = useState(0);
   let maxSlide = useRef(data?.length - 1).current;
   const loadingItems = useRef(new Array(5).fill({ loading: true }));
-  console.log(loadingItems.current);
+  // console.log(loadingItems.current);
 
   // console.log(maxSlide);
 

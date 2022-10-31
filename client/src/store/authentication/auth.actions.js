@@ -5,7 +5,7 @@ const userData = JSON.parse(localStorage.getItem("userLogin")) || [];
 export const getOTP = (payload) => (dispatch) => {
 
   dispatch({ type: types.GET_OTP, payload: payload });
-  console.log("payload:", payload);
+  // console.log("payload:", payload);
   let x = JSON.parse(localStorage.getItem("userLogin")) || [];
   let flag = false;
   for (let i = 0; i < x.length; i++) {
@@ -28,6 +28,6 @@ export const saveDetails = (payload) => (dispatch) => {
   userData.push(payload);
   localStorage.setItem("userLogin", JSON.stringify(userData));
   localStorage.setItem("currentLogin", JSON.stringify(payload));
-  console.log("data:", payload);
+  // console.log("data:", payload);
   dispatch({ type: types.GET_LOGIN });
 };
