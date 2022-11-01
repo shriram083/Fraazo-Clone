@@ -84,7 +84,9 @@ const CardCount = styled.div`
 
 const SingleProduct = ({ item, onClose, setQuery }) => {
     const [countValue, setCountValue] = useState(0);
-    const [ValidImgUrl, setValidImgUrl] = useState(imgNotFound);
+    const [ValidImgUrl, setValidImgUrl] = useState(
+        "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/master/client/src/assets/no-image-fraazo.png"
+    );
     const dispatch = useDispatch();
     const {
         data: cartData,
@@ -148,7 +150,11 @@ const SingleProduct = ({ item, onClose, setQuery }) => {
         axios
             .get(item?.imgUrl)
             .then((res) => setValidImgUrl(item?.imgUrl))
-            .catch((err) => setValidImgUrl(imgNotFound));
+            .catch((err) =>
+                setValidImgUrl(
+                    "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/master/client/src/assets/no-image-fraazo.png"
+                )
+            );
     }, [item?.imgUrl]);
 
     return (

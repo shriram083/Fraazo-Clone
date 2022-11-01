@@ -87,7 +87,9 @@ const AllProductsLayout = ({ product }) => {
     // console.log("porductsData", product);
     const [countValue, setCountValue] = useState(0);
     const [isSkeleten, setIsSkeleten] = useState(true);
-    const [ValidImgUrl, setValidImgUrl] = useState(imgNotFound);
+    const [ValidImgUrl, setValidImgUrl] = useState(
+        "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/master/client/src/assets/no-image-fraazo.png"
+    );
     const dispatch = useDispatch();
     const {
         data: cartData,
@@ -170,7 +172,11 @@ const AllProductsLayout = ({ product }) => {
         axios
             .get(product?.imgUrl)
             .then((res) => setValidImgUrl(product?.imgUrl))
-            .catch((err) => setValidImgUrl(imgNotFound));
+            .catch((err) =>
+                setValidImgUrl(
+                    "https://raw.githubusercontent.com/shriram083/Fraazo-Clone/master/client/src/assets/no-image-fraazo.png"
+                )
+            );
     }, [product?.imgUrl]);
 
     return (
